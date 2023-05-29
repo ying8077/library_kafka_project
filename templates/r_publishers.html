@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>出版商</title>
+      <meta name="google" content="notranslate">
+   </head>
+   <body>
+
+    <h1>所有出版商</h1>
+  <br>
+    <div><a href="/r_member">回會員控制頁面</a></div>
+    <hr>
+      <table border = 1>
+         <thead>
+            <td>編號</td>
+            <td>出版社</td>
+         </thead>
+         
+         {% for row in publishers %}  
+            <tr>
+               <td>{{row["publisher_id"]}}</td>
+               <td>{{row["pname"]}}</td>
+            </tr>
+         {% endfor %}
+      </table>
+
+   </body>
+</html>

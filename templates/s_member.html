@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>管理員專區</title>
+        <meta name="google" content="notranslate">
+     </head>
+<body>
+    <h1>{{ sname }}你好，歡迎你回來</h1>
+    <br>
+    <h1>查詢</h1>
+    <a href="/reader_list">查看所有讀者</a>
+    <br>
+    <a href="/s_profile">查看個人資料</a>
+    <br>
+    <a href="/book_manage">查看所有書籍</a>
+    <br>
+    <a href="/report_manage">查看所有借閱紀錄</a>
+    <br>
+    <a href="/recommend_list">查看讀者薦購名單</a>
+    <br>
+    <hr>
+    <h1>新增</h1>
+    <br>
+    <a href="/book_manage">新增書籍</a>
+    <br>
+    <a href="/report_manage">新增一筆借閱紀錄</a>
+    <br>
+    <hr>
+    <h1>修改</h1>
+    <br>
+    <a href="/s_modify">修改員工個人資料</a>
+    <br>
+    <hr>
+    <h1>刪除</h1>
+    <br>
+    <a href="/del_reader">刪除讀者帳戶</a>
+    <br>
+    <a href="/del_staff">刪除管理員帳戶</a>
+    <br>
+    <a href="/report_manage">刪除單筆借閱紀錄</a>
+    <br>
+    <a href="/book_manage">下架書籍</a>
+    <br>
+    <input type="button" value="登出" onclick="location.href='/s_signout'">
+    <br>
+</body>
+</html>

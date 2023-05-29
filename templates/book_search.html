@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>查詢結果</title>
+      <meta name="google" content="notranslate">
+   </head>
+   <body>
+    <h1>查詢結果</h1>
+    <br>
+    <div><a href="/">回到首頁</a></div>
+    <br>
+    <hr>
+      <table border = 1>
+         <thead>
+            <td>ISBN</td>
+            <td>書名</td>
+            <td>作者</td>
+            <td>分類</td>
+            <td>版次</td>
+         </thead>
+         
+         {% for row in book_search %}  
+            <tr>
+               <td>{{row["ISBN"]}}</td>
+               <td>{{row["title"]}}</td>
+               <td> {{row["author"]}}</td>
+               <td>{{row['category']}}</td>
+               <td>{{row['version']}}</td>	
+            </tr>
+         {% endfor %}
+      </table>
+   </body>
+</html>

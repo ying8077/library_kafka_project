@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>書籍薦購</title>
+    <meta name="google" content="notranslate">
+ </head>
+
+<body>
+    <h1>書籍薦購，你想向圖書館推薦什麼書?</h1><br>
+    <div><a href="/r_member">回會員控制頁面</a></div>
+    <hr>
+    <form action="{{ url_for('new_recommend') }}" method="POST">
+        ISBN<br>
+        <input type="text" name="ISBN" /></br>
+        書名<br>
+        <input type="text" name="title" /></br>
+        作者<br>
+        <textarea type="text" name="author"></textarea><br>
+        分類<br>
+        <input type="text" name="category" /></br>
+        版次<br>
+        <input type="text" name="version" /><br><br>
+        <button>推薦</button>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>修改個人資料</title>
+        <meta name="google" content="notranslate">
+     </head>
+<body>
+    <h1>修改員工個人資料</h1>
+    <form action="{{ url_for('s_modify0') }}" method="POST">
+        員工編號：{{ empid }} <br>
+        修改名字：<br>
+        <input type="text" name="sname" /></br>
+        修改密碼<br>
+        <input type="password" name="password" /><br><br>
+        <br>
+        <button>修改</button>
+        <br>
+        <div><a href="/s_member">回管理員控制頁面</a></div>
+    </form>
+</body>
+</html>

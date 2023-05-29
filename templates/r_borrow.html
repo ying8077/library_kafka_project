@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+
+<head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>借閱紀錄</title>
+   <meta name="google" content="notranslate">
+</head>
+
+<body>
+
+   <h1>我的借閱紀錄</h1>
+   <br>
+    <div><a href="/r_member">回會員控制頁面</a></div>
+    <br>
+   <hr>
+   <table border=1>
+      <thead>
+         <td>ISBN</td>
+         <td>書名</td>
+         <td>借閱日期</td>
+         <td>應歸還日期</td>
+         <td>還書</td>
+      </thead>
+
+      {% for row in borrowed %}
+      <tr>
+         <td>{{row["book_no"]}}</td>
+         <td>{{row["title"]}}</td>
+         <td>{{row["issue"]}}</td>
+         <td>{{row["return_date"]}}</td>
+         <td>
+            <a href="/return_book?book={{row['book_no']}}">我要還書</a>
+         </td>
+      </tr>
+      {% endfor %}
+   </table>
+
+</body>
+</html>

@@ -10,21 +10,27 @@ app.secret_key = 'nccugogo'
 def home():
     return render_template('home.html')
 
-# 建立kafka主題：登入事件
-def send_login_event(user_id):
+def write_event(topic, msg):
     producer = KafkaProducer(bootstrap_servers='localhost:9092')
-    topic = 'login_events'
-    message = f'User {user_id} logged in'
-    producer.send(topic, message.encode())
+    producer.send(topic, msg.encode())
     producer.close()
+
+# 建立kafka主題：登入事件
+def send_login_event(ssn, name):
+    topic = 'login_events'
+    message = f'{{"user_ssn": "{ssn}", "user_name": "{name}", "behavior": "log in"}}'
+    write_event(topic, message)
+
+def send_logout_event(ssn, name):
+    topic = 'logout_events'
+    message = f'{{"user_ssn": "{ssn}", "user_name": "{name}", "behavior": "log out"}}'
+    write_event(topic, message)
 
 # 建立kafka主題："搜尋書本"事件
 def send_search_history(book_name):
-    producer = KafkaProducer(bootstrap_servers='localhost:9092')
     topic = 'search_history'
     message = f'search：{book_name}'
-    producer.send(topic, message.encode())
-    producer.close()
+    write_event(topic, message) 
 
 # 讀者登入，每次登入就記錄到topic(kafka log)   
 @app.route('/r_signin',methods = ['POST'])
@@ -42,7 +48,7 @@ def r_signin():
   ssn = cur.fetchone()[0]
   session["reader"] = rname
   session["ssn"] = ssn
-  send_login_event(rname)
+  send_login_event(ssn, rname)
   return redirect("/r_member")
 
 # 讀者註冊
@@ -74,7 +80,9 @@ def r_signup():
 # 讀者登出
 @app.route('/r_signout')
 def r_signout():
-  del session["reader"]
+  ssn = session["ssn"]
+  rname = session["reader"]
+  send_logout_event(ssn, rname)
   return redirect("/")
 
 # 任何訪客搜尋書本，都會被記錄到log

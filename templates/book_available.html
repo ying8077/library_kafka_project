@@ -10,12 +10,15 @@
 
 <body>
 
-   <h1>我要借閱</h1>
+   <h1>查看所有書籍/借書</h1>
+   <form action="/book_search">
+       請輸入書名
+       <input type="text" name="book_search"/>
+       <button>查詢</button>
+   </form>
    <br>
-    <div><a href="/r_member">回會員控制頁面</a></div>
-    <br>
-    <div><a href="/r_publishers">查看所有出版商</a></div>
-   <hr>
+     <div><a href="/r_member">回會員控制頁面</a></div>
+     <hr>
    <table border=1>
       <thead>
          <td>ISBN</td>

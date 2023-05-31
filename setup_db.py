@@ -27,7 +27,7 @@ with db:
     data = ()
     cursor = db.cursor()
     cursor.execute(
-        'INSERT INTO readers(rname, ssn, address, mail, phone, password) VALUES ("dylan","b122456731","台北市文山區","xxx@gmail.com","0935641297","5897")'
+        'INSERT INTO readers(rname, ssn, address, mail, phone, password) VALUES ("kevin","b122456731","台北市文山區指南路二段64號","nccu2022@gmail.com","0935641297","1234")'
     )
 print ("readers table created successfully")
 
@@ -36,7 +36,7 @@ with db:
     db.executescript(create_db_sql)
     cursor = db.cursor()
     cursor.execute(
-        'INSERT INTO staffs(sname, empid, password) VALUES ("Lisa","s111753164", "1234")'
+        'INSERT INTO staffs(sname, empid, password) VALUES ("Lisa","123", "123")'
     )
 print ("staffs table created successfully")
 
@@ -45,7 +45,7 @@ with db:
     db.executescript(create_db_sql)
     cursor = db.cursor()
     cursor.execute(
-        'INSERT INTO reports(User_id, book_no, title, issue, return_date) VALUES ("b122456731","9786267252246","測試書籍","2023-05-01 10:00:00","2023-05-08 10:00:00")'
+        'INSERT INTO reports(User_id, book_no, title, issue, return_date) VALUES ("b122456731","9786267252246","沈錳坤 資料庫聖經","2023-06-01 10:00:00","2023-07-01 10:00:00")'
     )
 print ("reports table created successfully")
 

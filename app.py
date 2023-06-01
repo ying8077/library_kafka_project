@@ -27,10 +27,19 @@ def send_logout_event(ssn, name):
     write_event(topic, message)
 
 # 建立kafka主題："搜尋書本"事件
+# 開consumer前要先輸入chcp 65001(UTF-8)，把亂碼轉成中文
 def send_search_history(book_name):
+    producer = KafkaProducer(bootstrap_servers='localhost:9092')
     topic = 'search_history'
-    message = f'search：{book_name}'
-    write_event(topic, message) 
+    if "reader" in session:
+      rname = session["reader"]
+      ssn = session["ssn"]
+    else:
+      rname = "visitor"
+      ssn = "visitor"
+    message = f'{{"user_ssn": "{ssn}", "user_name": "{rname}", "behavior": "search", "book_name": "{book_name}"}}'
+    producer.send(topic, message.encode('utf-8'))
+    producer.close()
 
 # 讀者登入，每次登入就記錄到topic(kafka log)   
 @app.route('/r_signin',methods = ['POST'])

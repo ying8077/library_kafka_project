@@ -21,6 +21,7 @@ def send_login_event(ssn, name):
     message = f'{{"user_ssn": "{ssn}", "user_name": "{name}", "behavior": "log in"}}'
     write_event(topic, message)
 
+#建立kafka主題："登出事件"事件
 def send_logout_event(ssn, name):
     topic = 'logout_events'
     message = f'{{"user_ssn": "{ssn}", "user_name": "{name}", "behavior": "log out"}}'
@@ -31,6 +32,22 @@ def send_search_history(book_name):
     topic = 'search_history'
     message = f'search：{book_name}'
     write_event(topic, message) 
+
+# 建立kafka主題："借書事件"事件
+def send_borrow_event(ssn, user, book_name):
+    producer = KafkaProducer(bootstrap_servers='localhost:9092')
+    topic = 'borrow_events'
+    message = f'{{"user_ssn": "{ssn}", "user_name": "{user}", "behavior": "borrow" ,"book_name":"{book_name}"}}'
+    producer.send(topic, message.encode())
+    producer.close()
+
+# 建立kafka主題："還書事件"事件
+def send_return_event(ssn, user, book_name):
+    producer = KafkaProducer(bootstrap_servers='localhost:9092')
+    topic = 'return_events'
+    message = f'{{"user_ssn": "{ssn}", "user_name": "{user}", "behavior": "return" ,"book_name":"{book_name}"}}'
+    producer.send(topic, message.encode())
+    producer.close()
 
 # 讀者登入，每次登入就記錄到topic(kafka log)   
 @app.route('/r_signin',methods = ['POST'])
@@ -172,7 +189,7 @@ def book_available():
     return redirect("/")
 
 # 讀者借書
-@app.route('/r_borrowed')
+@app.route('/r_borrowed') #查看借了哪些書
 def r_borrowed():
   if "reader" in session:
     ssn = session["ssn"]
@@ -211,6 +228,7 @@ def borrow():
                 if tmp is None:
                     return_date = datetime.date.today() + datetime.timedelta(days=30)
                     cur2.execute("INSERT INTO reports(User_id, book_no, title) VALUES (?, ?, ?)", (people, ISBN, title))
+                    send_borrow_event(people, reader, title)
                     msg1 = "借閱成功！請在"+return_date.strftime('%Y-%m-%d')+"之前歸還，謝謝！"
                     with sql.connect("books.db") as con:
                         cur = con.cursor()
@@ -233,12 +251,21 @@ def borrow():
 def return_book():
    if "reader" in session:
      book = request.args.get('book')
+     with sql.connect("reports.db") as con:
+        cur = con.cursor()
+        cur.execute("SELECT title FROM reports WHERE book_no = ?", (book,))
+        title = cur.fetchone()[0]
+    
+     
      con = sql.connect("reports.db")
      de = "DELETE FROM reports WHERE book_no="+book
      cur = con.cursor()
      cur.execute(de)
      con.commit()
      con.close()
+     ssn = session["ssn"]
+     reader = session["reader"]
+     send_return_event(ssn, reader, title)
      return render_template("r_result.html", msg = "成功歸還！祝您有美好的一天！")
    else:
       return redirect("/")

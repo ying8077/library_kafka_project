@@ -1,36 +1,93 @@
 <!doctype html>
 <html>
-   <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>查詢結果</title>
-      <meta name="google" content="notranslate">
-   </head>
-   <body>
-    <h1>查詢結果</h1>
-    <br>
-    <div><a href="/">回到首頁</a></div>
-    <br>
-    <div><a href="/booklist">繼續搜尋其他書本</a></div>
-    <hr>
-      <table border = 1>
-         <thead>
-            <td>ISBN</td>
-            <td>書名</td>
-            <td>作者</td>
-            <td>分類</td>
-            <td>版次</td>
-         </thead>
-         
-         {% for row in book_search %}  
-            <tr>
-               <td>{{row["ISBN"]}}</td>
-               <td>{{row["title"]}}</td>
-               <td> {{row["author"]}}</td>
-               <td>{{row['category']}}</td>
-               <td>{{row['version']}}</td>	
-            </tr>
-         {% endfor %}
-      </table>
-   </body>
+
+<head>
+   <meta charset="utf-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>查詢結果</title>
+   <meta name="google" content="notranslate">
+   <link rel=stylesheet type="text/css" href="/static/styles/header.css">
+   <link rel=stylesheet type="text/css" href="/static/styles/search.css">
+   <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+   <header>
+      <div class="header">
+         <div>
+            <a href="/"><img class="header_logo" src="/static/images/logo.png" /></a>
+         </div>
+         <div class='header_right'>
+            <div>最新消息</div>
+            <div>關於我們</div>
+            <a href="/login" class='btn_login'>登入</a>
+         </div>
+      </div>
+   </header>
+   <form action="/book_search" class='w-9/12 mx-auto mt-12 p-6 search'>
+      <input class='w-full p-6 search_input' type="text" name="book_search" placeholder='請輸入關鍵字' />
+      <input type="image" class='search_icon' src="./static/images/search.png" alt="Submit">
+      <img class='mt-2' src="./static/images/line.png" />
+   </form>
+   <div class="w-2/3 mx-auto mt-24">
+      {% for row in books %}
+      <div class="book py-8">
+         <div class="relative">
+            <img src="/static/images/{{default(row['img'])}}">
+            <div class="borrow">
+               <a href="/" class="btn_borrow">借書</a>
+            </div>
+         </div>
+         <div class="ml-24 mt-4">
+            <h3 class="mb-2 text-lg font-bold">{{row['title']}}</h3>
+            <div class="space-y-2">
+               <div>分類 : {{row['category']}}</div>
+               <div>ISBN : {{row['ISBN']}}</div>
+               <div>作者 : {{row['author']}}</div>
+               <div>出版社 : {{row['publisher']}}</div>
+            </div>
+         </div>
+      </div>
+      {% endfor %}
+</body>
+
 </html>
+
+<style>
+   .book {
+      width: 100%;
+      display: flex;
+      border-bottom: 1px solid #9c9c9c;
+   }
+
+   .book:last-of-type {
+      border-bottom: none;
+   }
+
+   .book img {
+      width: 160px;
+      height: 200px;
+      padding: 16px 0;
+      border-radius: 10px;
+      background-color: #F6F6F6;
+   }
+
+   .borrow {
+      position: absolute;
+      top: 0;
+      right: -8px;
+   }
+
+   .btn_borrow {
+      padding: 16px 12px;
+      border-radius: 50%;
+      color: #000000;
+      background-color: #c7eddc;
+      text-decoration: none;
+   }
+
+   .btn_borrow:hover {
+      color: #FEFBED;
+      background-color: #2F4F4F;
+   }
+</style>

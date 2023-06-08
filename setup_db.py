@@ -4,7 +4,7 @@ import csv
 with open('./books.csv', newline='', encoding="utf-8") as f:
     csv_reader = csv.DictReader(f) 
     books = [
-        (row['ISBN'], row['書名'], row['作者'], row['分類'], row['版次'], row['出版社'])
+        (row['ISBN'], row['書名'], row['作者'], row['分類'], row['版次'], row['出版社'], row['圖片'], row['簡介'])
         for row in csv_reader
         ]
 
@@ -15,7 +15,7 @@ db = sqlite3.connect('books.db')
 with db:
     db.executescript(create_db_sql)
     db.executemany(
-        'INSERT INTO  books(ISBN, title, author, category, version, publisher) VALUES (?, ?, ?, ?, ?, ?)',
+        'INSERT INTO books(ISBN, title, author, category, version, publisher, img, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
         books
     )
 print ("\n")

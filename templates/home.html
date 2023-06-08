@@ -1,34 +1,105 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>首頁</title>
-		<meta name="google" content="notranslate">
-	 </head>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>首頁</title>
+	<meta name="google" content="notranslate">
+	<link rel=stylesheet type="text/css" href="/static/styles/header.css">
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
 <body>
-<h1>圖書資訊暨借閱管理系統</h1>
-<a href="/booklist">查看所有書籍(我是訪客)</a>
-<br>
-<br>
-<br>
-<h1>管理員登入(測試用 帳密都是123)</h1>
-    <form action="/s_signin" method="POST">
-        員工編號 <input type="text" name="empid" /><br/>
-        輸入密碼 <input type="password" name="password" /><br/>
-        <button>登入</button>
-    </form>
-    <br>
-	<br>
-	<h1>讀者會員登入(kevin,1234)</h1>
-	<form action="/r_signin" method="POST">
-		姓名 <input type="text" name="rname" /><br />
-		密碼 <input type="password" name="password" /><br />
-		<button>登入</button>
-	</form>
-	<br>
-	<div><a href="/new_reader">註冊讀者帳號</a></div>
-	<hr>
-	小提醒：測試網頁前請先確認zookeeper、kafka server是否已經打開了
- </body>
- </html>
+	<header>
+		<div class="header">
+			<div>
+				<a href="/"><img class="header_logo" src="/static/images/logo.png" /></a>
+			</div>
+			<div class='header_right'>
+				<div>最新消息</div>
+				<div>關於我們</div>
+				<a href="/signIn" class='btn_login'>登入</a>
+			</div>
+		</div>
+	</header>
+	<div>
+		<img class="w-full" src="./static/images/banner.png" alt="banner" />
+	</div>
+	<div class='w-9/12 mx-auto -mt-12 p-6 search'>
+		<input class='w-full p-6 search_input' type="text" placeholder='請輸入關鍵字' />
+		<img class='search_icon' src="./static/images/search.png" />
+		<img class='mt-2' src="./static/images/line.png" />
+	</div>
+	</div>
+	<div class='my-48'>
+		<h3 class='flex_center text-4xl font-bold'>新書推薦</h3>
+		<div class="flex_center">
+			{% for row in books %}
+			<a href="/book/{{row["id"]}}" class="mt-12 mx-6 book">
+				<img class="py-4" src="./static/images/{{row['img']}}" />
+				<div class="book_description pl-2 text-xl">
+					<div class="mt-4">{{substract(row["title"])}}</div>
+					<div>{{row['author']}}</div>
+				</div>
+			</a>
+			{% endfor %}
+		</div>
+	</div>
+</body>
+
+</html>
+
+<style>
+	.flex_center {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.search {
+		border-radius: 5px;
+		position: relative;
+		z-index: 5;
+		background-color: #ffffff;
+		box-shadow: 0 4px 16px rgba(141, 211, 187, 0.15);
+	}
+
+	.search_input {
+		border-radius: 5px;
+		position: relative;
+		font-size: larger;
+		border: 2px solid #7c797e;
+	}
+
+	.search_input:active,
+	.search_input:focus {
+		outline: none;
+	}
+
+	.search_icon {
+		width: 36px;
+		height: 36px;
+		position: absolute;
+		right: 48px;
+		bottom: 60px;
+	}
+
+	.book {
+		transition: all .3s;
+	}
+
+	.book img {
+		width: 280px;
+		border-radius: 10px;
+		background-color: #F6F6F6;
+	}
+
+	.book:hover {
+		transform: scale(1.2, 1.2);
+	}
+
+	.book_description {
+		font-size: larger;
+	}
+</style>

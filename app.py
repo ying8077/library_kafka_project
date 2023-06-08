@@ -1,14 +1,21 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, jsonify
 from kafka import KafkaProducer
 import sqlite3 as sql
 import datetime
+import json
 
 app = Flask(__name__)
 app.secret_key = 'nccugogo'
 
-@app.route('/')
-def home():
-    return render_template('home.html')
+def substract(title):
+  max_length = 12
+  if len(title) > max_length:
+    title = title[:max_length] + '...'
+  return title
+
+def line_break(description):
+   
+   return
 
 def write_event(topic, msg):
     producer = KafkaProducer(bootstrap_servers='localhost:9092')
@@ -57,6 +64,24 @@ def send_return_event(ssn, user, book_name):
     message = f'{{"user_ssn": "{ssn}", "user_name": "{user}", "behavior": "return" ,"book_name":"{book_name}"}}'
     producer.send(topic, message.encode())
     producer.close()
+
+@app.route('/')
+def home():
+  con = sql.connect("books.db")
+  con.row_factory = sql.Row
+  cur = con.cursor()
+  cur.execute("select * from books order by id desc LIMIT 5")
+  books = cur.fetchall()
+  return render_template('home.html', books=books, substract=substract)
+
+@app.route('/book/<int:id>')
+def book(id):
+  con = sql.connect("books.db")
+  con.row_factory = sql.Row
+  cur = con.cursor()
+  cur.execute("SELECT * FROM books WHERE id=?", (id,))
+  book = cur.fetchall()
+  return render_template('book.html', book=book)
 
 # 讀者登入，每次登入就記錄到topic(kafka log)   
 @app.route('/r_signin',methods = ['POST'])
@@ -305,7 +330,7 @@ def new_recommend():
       finally:
          con.close()
          return render_template("r_result.html",msg = msg)
-      
+
 # 訪客 查看書籍
 @app.route('/booklist')
 def booklist():
@@ -313,7 +338,7 @@ def booklist():
     con.row_factory = sql.Row
     cur = con.cursor()
     cur.execute("select * from books")
-    
+
     books = cur.fetchall()
     return render_template("booklist.html", books = books)
 
@@ -486,4 +511,7 @@ def borrow_result():
     return render_template("result.html", msg1=message1, msg2=message2)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(
+      port = 5003,
+      debug = True
+      )

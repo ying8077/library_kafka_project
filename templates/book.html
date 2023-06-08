@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首頁</title>
+    <meta name="google" content="notranslate">
+    <link rel=stylesheet type="text/css" href="/static/styles/header.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div>
+                <a href="/"><img class="header_logo" src="/static/images/logo.png" /></a>
+            </div>
+            <div class='header_right'>
+                <div>最新消息</div>
+                <div>關於我們</div>
+                <a href="/signIn" class='btn_login'>登入</a>
+            </div>
+        </div>
+    </header>
+    {% for row in book %}
+    <div class="w-3/5 mx-auto mt-24 book">
+        <div class="book_info">
+            <img src="/static/images/{{row['img']}}">
+            <div class="ml-24 mt-24">
+                <h3 class="mb-8 text-3xl font-bold">{{row['title']}}</h3>
+                <div class="space-y-2">
+                    <div>中文書＞心理勵志＞自我成長</div>
+                    <div>ISBN : {{row['ISBN']}}</div>
+                    <div>作者 : {{row['author']}}</div>
+                    <div>出版社 : {{row['publisher']}}</div>
+                </div>
+                <div class="mt-4">
+                    <a href="/" class="btn_borrow">借閱申請</a>
+                </div>
+            </div>
+        </div>
+        <div class="my-24 ml-8 book_description">
+            <h4 class="text-2xl font-bold">內容簡介</h4>
+            <p class="mt-8 ml-4">{{row['description']|safe}}</p>
+        </div>
+    </div>
+    {% endfor %}
+</body>
+
+</html>
+
+<style>
+    .book {
+        font-size: large;
+    }
+
+    .book_info {
+        width: 100%;
+        display: flex;
+    }
+
+    .book_info img {
+        width: 400px;
+        padding: 16px 0;
+        border-radius: 10px;
+        background-color: #F6F6F6;
+    }
+
+    .book_description h4 {
+        color: #2F4F4F;
+        padding-bottom: 4px;
+        border-bottom: 1.5px solid #9c9c9c;
+    }
+
+    .btn_borrow {
+        padding: 8px 20px;
+        border-radius: 5px;
+        color: #000000;
+        background-color: #c7eddc;
+        text-decoration: none;
+    }
+
+    .btn_borrow:hover {
+        color: #FEFBED;
+        background-color: #2F4F4F;
+    }
+
+</style>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session,  jsonify
+from flask import Flask, render_template, request, redirect, session, jsonify
 from kafka import KafkaProducer, KafkaConsumer
 import sqlite3 as sql
 import datetime
@@ -139,6 +139,13 @@ def send_borrow_event(ssn, user, book_name):
 def send_return_event(ssn, user, book_name):
     topic = 'return_events'
     message = f'{{"user_ssn": "{ssn}", "user_name": "{user}", "behavior": "return" ,"book_name":"{book_name}"}}'
+    write_event(topic,message)
+
+# 建立kafka主題："滾動事件"事件
+def send_scroll_event(ssn, user, bodyTop):
+    topic = 'scroll_events'
+    message = f'{{"user_ssn": "{ssn}", "user_name": "{user}", "behavior": "stop_scroll" ,"scroll_top":"{bodyTop}"}}'
+    print(message)
     write_event(topic,message)
 
 @app.route('/')
@@ -453,6 +460,19 @@ def booklist():
     books = cur.fetchall()
     return render_template("booklist.html", books = books)
 
+@app.route('/scroll_stop',methods = ['POST', 'GET'])
+def scroll_stop():
+   if request.method == 'POST':
+    if "reader" in session:
+        reader = session["reader"]
+        ssn = session["ssn"]
+        insertValues = request.get_json()
+        print(insertValues['bodyTop'])
+        bodyTop = insertValues['bodyTop']
+        send_scroll_event(ssn, reader, bodyTop)
+        return jsonify({"message":"success"})
+      
+
 
 
 
@@ -644,7 +664,7 @@ def all():
     con = sql.connect("borrowtopic.db")
     con.row_factory = sql.Row
     cur = con.cursor()
-    cur.execute("SELECT book_name, COUNT(book_name) as num FROM borrowtopic GROUP BY book_name")
+    cur.execute("SELECT book_name, COUNT(book_name) as num FROM borrowtopic GROUP BY book_name ORDER BY COUNT(book_name) DESC")
     data = cur.fetchall()
     con.close()
     for row in data:
@@ -655,7 +675,7 @@ def all():
     con = sql.connect("searchtopic.db")
     con.row_factory = sql.Row
     cur = con.cursor()
-    cur.execute("SELECT book_name, COUNT(book_name) as num FROM searchtopic GROUP BY book_name")
+    cur.execute("SELECT book_name, COUNT(book_name) as num FROM searchtopic GROUP BY book_name ORDER BY COUNT(book_name) DESC")
     data = cur.fetchall()
     con.close()
     for row in data:
@@ -676,9 +696,7 @@ def userRecordSearch():
 
 
 if __name__ == '__main__':
-    app.run(
-      port=5004,
-      debug=True)
+    app.run(debug=True)
 
 
 

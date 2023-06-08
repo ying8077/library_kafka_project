@@ -46,6 +46,118 @@
         </div>
     </div>
     {% endfor %}
+    <script language="javascript">
+        let t1 = 0;
+        let t2 = 0;
+        let timer = null;
+
+        document.onscroll = function () {
+            clearTimeout(timer);
+            timer = setTimeout(isscrollEnd, 10000);
+            t1 = document.documentElement.scrollTop || document.body.scrollTop;
+        }
+        function isscrollEnd() {
+            t2 = document.documentElement.scrollTop || document.body.scrollTop;
+            if (t2 == t1) {
+                console.log('滾動結束了')
+                var bodyTop = 0;
+                if (typeof window.pageYOffset != "undefined") {
+                    bodyTop = window.pageYOffset;
+
+                } else if (typeof document.compatMode != "undefined"
+                    && document.compatMode != "BackCompat") {
+                    bodyTop = document.documentElement.scrollTop;
+
+                } else if (typeof document.body != "undefined") {
+                    bodyTop = document.body.scrollTop;
+                }
+                /* 顯示出捲動後的高度值 */
+                console.log(bodyTop)
+
+                fetch("http://localhost:5000/scroll_stop", {
+                    body: JSON.stringify({
+                        bodyTop : bodyTop,
+                    }),
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                    }),
+                    method: "POST"
+                })
+                    // .then((json) => json.json())
+            }
+        }
+    </script>
+
+    <!-- <form name="form1" method="post" action="">
+        <center>
+            <p>
+                <font size="5" color="#0000FF" face="華文細黑">您在本站已停留：</font>
+            </p>
+            <p>
+                <input name="textarea" type="text" value="">
+            </p>
+        </center>
+        <script language="javascript">
+
+            for (var i = 0; i < 100; i++) {
+                document.write("<br/>");
+            }
+
+            var topValue = 0,// 上次滚动条到顶部的距离
+                interval = null;// 定时器
+            document.onscroll = function () {
+                if (interval == null)// 未发起时，启动定时器，1秒1执行
+                    interval = setInterval("test()", 10000);
+                topValue = document.documentElement.scrollTop;
+            }
+
+            function test() {
+                // 判断此刻到顶部的距离是否和1秒前的距离相等
+                if (document.documentElement.scrollTop == topValue) {
+                    alert("scroll bar is stopping!");
+                    clearInterval(interval);
+                    interval = null;
+                }
+            }
+
+            var second = 0;
+            var minute = 0;
+            var hour = 0;
+            window.setTimeout("interval();", 1000);
+            function interval() {
+                second++;
+                if (second == 60) {
+                    second = 0; minute += 1;
+                }
+                if (minute == 60) {
+                    minute = 0; hour += 1;
+                }
+                document.form1.textarea.value = hour + "時" + minute + "分" + second + "秒";
+                window.setTimeout("interval();", 1000);
+
+                if (second == 10) {
+                    console.log("haha")
+
+                    var bodyTop = 0;
+                    if (typeof window.pageYOffset != "undefined") {
+                        bodyTop = window.pageYOffset;
+
+                    } else if (typeof document.compatMode != "undefined"
+                        && document.compatMode != "BackCompat") {
+                        bodyTop = document.documentElement.scrollTop;
+
+                    } else if (typeof document.body != "undefined") {
+                        bodyTop = document.body.scrollTop;
+                    }
+                    /* 顯示出捲動後的高度值 */
+                    console.log(bodyTop)
+                    // document.getElementById("jsScrollTop").innerHTML = bodyTop;
+                }
+
+            }
+        </script>
+    </form> -->
+
 </body>
 
 </html>
@@ -85,5 +197,4 @@
         color: #FEFBED;
         background-color: #2F4F4F;
     }
-
 </style>

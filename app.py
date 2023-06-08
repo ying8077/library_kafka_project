@@ -583,7 +583,7 @@ def all():
     con = sql.connect("borrowtopic.db")
     con.row_factory = sql.Row
     cur = con.cursor()
-    cur.execute("SELECT book_name, COUNT(book_name) as num FROM borrowtopic GROUP BY book_name")
+    cur.execute("SELECT book_name, COUNT(book_name) as num FROM borrowtopic GROUP BY book_name ORDER BY COUNT(book_name) DESC")
     data = cur.fetchall()
     con.close()
     for row in data:
@@ -594,7 +594,7 @@ def all():
     con = sql.connect("searchtopic.db")
     con.row_factory = sql.Row
     cur = con.cursor()
-    cur.execute("SELECT book_name, COUNT(book_name) as num FROM searchtopic GROUP BY book_name")
+    cur.execute("SELECT book_name, COUNT(book_name) as num FROM searchtopic GROUP BY book_name ORDER BY COUNT(book_name) DESC")
     data = cur.fetchall()
     con.close()
     for row in data:

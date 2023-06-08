@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-from flask import Flask, render_template, request, redirect, session, jsonify
-from kafka import KafkaProducer
-=======
 from flask import Flask, render_template, request, redirect, session
 from kafka import KafkaProducer, KafkaConsumer
->>>>>>> 0489cf9cfab5500f94971b1918c4830af648f868
 import sqlite3 as sql
 import datetime
 import json
@@ -645,14 +640,9 @@ def userRecordSearch():
 
 
 if __name__ == '__main__':
-<<<<<<< HEAD
     app.run(
-      port = 5003,
-      debug = True
-      )
-=======
-    app.run(debug=True)
+      port=5004,
+      debug=True)
 
 
 
->>>>>>> 0489cf9cfab5500f94971b1918c4830af648f868

@@ -1,10 +1,13 @@
 CREATE TABLE books (
-    `ISBN` TEXT PRIMARY KEY,
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+    `ISBN` TEXT,
     `title` TEXT,
     `author` TEXT,
     `category` TEXT,
     `version` TEXT,
-    `publisher` TEXT
+    `publisher` TEXT,
+    `img` TEXT,
+    `description` TEXT
 );
 
 CREATE TABLE recommends (
@@ -57,6 +60,13 @@ CREATE TABLE borrowtopic (
 );
 
 CREATE TABLE logintopic (
+    `No` INTEGER PRIMARY KEY ASC AUTOINCREMENT,
+    `user_ssn` TEXT,
+    `user_name` TEXT,
+    `behavior` TEXT
+);
+
+CREATE TABLE searchtopic (
     `No` INTEGER PRIMARY KEY ASC AUTOINCREMENT,
     `user_ssn` TEXT,
     `user_name` TEXT,

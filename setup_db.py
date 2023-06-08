@@ -4,7 +4,7 @@ import csv
 with open('./books.csv', newline='', encoding="utf-8") as f:
     csv_reader = csv.DictReader(f) 
     books = [
-        (row['ISBN'], row['書名'], row['作者'], row['分類'], row['版次'], row['出版社'])
+        (row['ISBN'], row['書名'], row['作者'], row['分類'], row['版次'], row['出版社'], row['圖片'], row['簡介'])
         for row in csv_reader
         ]
 
@@ -21,7 +21,7 @@ with db:
     if result is None:
         db.executescript(create_db_sql)
         db.executemany(
-            'INSERT INTO  books(ISBN, title, author, category, version, publisher) VALUES (?, ?, ?, ?, ?, ?)',
+            'INSERT INTO books(ISBN, title, author, category, version, publisher, img, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
             books
         )
 print ("\n")
@@ -135,3 +135,18 @@ with db:
             'INSERT INTO logintopic(user_ssn, user_name, behavior) VALUES ("123456789","jeff","login")'
         )
 print ("logintopic table created successfully")
+
+
+db = sqlite3.connect('searchtopic.db')
+with db:
+    cursor = db.cursor()
+    # 檢查資料表是否已存在
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='searchtopic'")
+    result = cursor.fetchone()
+    if result is None:
+        db.executescript(create_db_sql)
+        cursor = db.cursor()
+        cursor.execute(
+            'INSERT INTO searchtopic(user_ssn, user_name, behavior) VALUES ("123456789","jeff","search")'
+        )
+print ("searchtopic table created successfully")

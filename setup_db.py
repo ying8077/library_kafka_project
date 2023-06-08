@@ -13,13 +13,6 @@ with open('create_db.sql', encoding="utf-8") as f:
 
 db = sqlite3.connect('books.db')
 with db:
-<<<<<<< HEAD
-    db.executescript(create_db_sql)
-    db.executemany(
-        'INSERT INTO books(ISBN, title, author, category, version, publisher, img, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        books
-    )
-=======
     cursor = db.cursor()
 
     # 檢查資料表是否已存在
@@ -28,10 +21,9 @@ with db:
     if result is None:
         db.executescript(create_db_sql)
         db.executemany(
-            'INSERT INTO  books(ISBN, title, author, category, version, publisher) VALUES (?, ?, ?, ?, ?, ?)',
+            'INSERT INTO books(ISBN, title, author, category, version, publisher, img, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
             books
         )
->>>>>>> 0489cf9cfab5500f94971b1918c4830af648f868
 print ("\n")
 print ("books table created successfully")
 

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 from flask import Flask, render_template, request, redirect, session, jsonify
 from kafka import KafkaProducer
+=======
+from flask import Flask, render_template, request, redirect, session
+from kafka import KafkaProducer, KafkaConsumer
+>>>>>>> 0489cf9cfab5500f94971b1918c4830af648f868
 import sqlite3 as sql
 import datetime
 import json
@@ -24,18 +29,35 @@ def write_event(topic, msg):
 
 # 建立kafka主題：登入事件
 def send_login_event(ssn, name):
+    msgList = []
     topic = 'login_events'
+    consumer = KafkaConsumer(topic, bootstrap_servers=['localhost:9092'], group_id='my_group', auto_offset_reset="earliest")
     message = f'{{"user_ssn": "{ssn}", "user_name": "{name}", "behavior": "log in"}}'
     write_event(topic, message)
-
-#建立kafka主題："登出事件"事件
+    c = consumer
+    for user in c:
+      msgList.append(user.value.decode('utf-8'))
+      break
+    consumer.close()
+    if (len(msgList) != 0):
+      for m in msgList:
+          temp = eval(m)
+          try:
+              with sql.connect("logintopic.db") as con:
+                  cur = con.cursor()
+                  cur.execute("INSERT INTO logintopic (user_ssn, user_name, behavior) VALUES (?,?,?)",(temp.get('user_ssn'), temp.get('user_name'), 'login') )
+                  con.commit()
+          except:
+            con.rollback()
+          finally:
+            con.close()
+# 建立kafka主題："登出事件"事件
 def send_logout_event(ssn, name):
     topic = 'logout_events'
     message = f'{{"user_ssn": "{ssn}", "user_name": "{name}", "behavior": "log out"}}'
     write_event(topic, message)
 
 # 建立kafka主題："搜尋書本"事件
-# 開consumer前要先輸入chcp 65001(UTF-8)，把亂碼轉成中文
 def send_search_history(book_name):
     producer = KafkaProducer(bootstrap_servers='localhost:9092')
     topic = 'search_history'
@@ -46,24 +68,82 @@ def send_search_history(book_name):
       rname = "visitor"
       ssn = "visitor"
     message = f'{{"user_ssn": "{ssn}", "user_name": "{rname}", "behavior": "search", "book_name": "{book_name}"}}'
-    producer.send(topic, message.encode('utf-8'))
-    producer.close()
+    write_event(topic, message)
+
+    msgList = []
+    consumer = KafkaConsumer(topic, bootstrap_servers=['localhost:9092'], group_id='my_group', auto_offset_reset="earliest")
+    c = consumer
+    for user in c:
+      msgList.append(user.value.decode('utf-8'))
+      break
+    consumer.close()
+
+    if (len(msgList) != 0):
+      for m in msgList:
+        temp = eval(m)
+        try:
+          with sql.connect("searchtopic.db") as con:
+            cur = con.cursor()
+            cur.execute("INSERT INTO searchtopic (user_ssn, user_name, behavior, book_name) VALUES(?,?,?,?)",(temp.get('user_ssn'), temp.get('user_name'), temp.get('behavior'), temp.get('book_name')))
+            con.commit()
+        except:
+          con.rollback()
+        finally:
+          con.commit()
 
 # 建立kafka主題："借書事件"事件
 def send_borrow_event(ssn, user, book_name):
-    producer = KafkaProducer(bootstrap_servers='localhost:9092')
+    msgList = []
     topic = 'borrow_events'
     message = f'{{"user_ssn": "{ssn}", "user_name": "{user}", "behavior": "borrow" ,"book_name":"{book_name}"}}'
-    producer.send(topic, message.encode())
-    producer.close()
+    write_event(topic,message)
+    consumer = KafkaConsumer(topic, bootstrap_servers=['localhost:9092'], group_id='my_group', auto_offset_reset="earliest")
+    c = consumer
+    for user in c:
+      msgList.append(user.value.decode('utf-8'))
+      break
+    consumer.close()
+    if (len(msgList) != 0):
+      for m in msgList:
+          temp = eval(m)
+          try:
+              with sql.connect("borrowtopic.db") as con:
+                  cur = con.cursor()
+                  cur.execute("INSERT INTO borrowtopic (user_ssn, user_name, behavior, book_name) VALUES (?,?,?,?)",(temp.get('user_ssn'), temp.get('user_name'), 'borrow', temp.get('book_name')) )
+                  con.commit()
+          except:
+            con.rollback()
+          finally:
+            con.close()
+
+    msgList = []
+    consumer = KafkaConsumer(topic, bootstrap_servers=['localhost:9092'], group_id='my_group', auto_offset_reset="earliest")
+    c = consumer
+    for user in c:
+      msgList.append(user.value.decode('utf-8'))
+      break
+    consumer.close()
+    
+    if (len(msgList) != 0):
+      for m in msgList:
+        print(eval(m))
+        temp = eval(m)
+        print(temp.get('user_name'))
+        try:
+          with sql.connect("borrowtopic.db") as con:
+            cur = con.cursor()
+            cur.execute("INSERT INTO borrowtopic (user_ssn, user_name, behavior, book_name) VALUES(?,?,?,?)",(temp.get('user_ssn'), temp.get('user_name'), temp.get('behavior'), temp.get('book_name')))
+            con.commit()
+        except:
+          con.rollback()
+        finally:
+          con.commit()
 
 # 建立kafka主題："還書事件"事件
 def send_return_event(ssn, user, book_name):
-    producer = KafkaProducer(bootstrap_servers='localhost:9092')
     topic = 'return_events'
     message = f'{{"user_ssn": "{ssn}", "user_name": "{user}", "behavior": "return" ,"book_name":"{book_name}"}}'
-    producer.send(topic, message.encode())
-    producer.close()
+    write_event(topic,message)
 
 @app.route('/')
 def home():
@@ -345,14 +425,6 @@ def booklist():
 
 
 
-
-
-
-
-
-
-
-
 # 以下為管理員的程式碼，不用看！！！
 @app.route('/report_manage')
 def reports():
@@ -510,8 +582,77 @@ def borrow_result():
     message2 = request.args.get("msg2", "發生錯誤，請聯繫圖書館")
     return render_template("result.html", msg1=message1, msg2=message2)
 
+@app.route('/supervise')
+def all():
+  def super_user_record():
+    con = sql.connect("borrowtopic.db")
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("SELECT user_ssn,user_name,book_name FROM borrowtopic")
+    data = cur.fetchall()
+    con.close()
+    for row in data:
+      print(row["user_ssn"])
+      print(row["user_name"])
+      print(row["book_name"])
+    return data
+  
+  def super_frquent_user():
+    con = sql.connect("logintopic.db")
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("SELECT user_ssn, user_name, COUNT(user_ssn) AS num FROM logintopic GROUP BY user_ssn ORDER BY COUNT(user_ssn) DESC")
+    data = cur.fetchall()
+    con.close()
+    for row in data:
+      print(row["user_ssn"])
+      print(row["user_name"])
+    return data
+  
+  def super_book_borrowed():
+    con = sql.connect("borrowtopic.db")
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("SELECT book_name, COUNT(book_name) as num FROM borrowtopic GROUP BY book_name")
+    data = cur.fetchall()
+    con.close()
+    for row in data:
+      print(row["book_name"])
+    return data
+  
+  def super_book_searched():
+    con = sql.connect("searchtopic.db")
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("SELECT book_name, COUNT(book_name) as num FROM searchtopic GROUP BY book_name")
+    data = cur.fetchall()
+    con.close()
+    for row in data:
+      print(row["book_name"])
+    return data
+  
+  return render_template("supervise.html",freq = super_frquent_user(), borrow = super_user_record(), bookborrow = super_book_borrowed(), search = super_book_searched())
+
+@app.route("/user_record_search")
+def userRecordSearch():
+   user = request.args.get("user_search")
+   con = sql.connect("borrowtopic.db")
+   con.row_factory = sql.Row
+   cur = con.cursor()
+   cur.execute("SELECT user_ssn, user_name,GROUP_CONCAT(book_name , ',') AS books, COUNT(user_ssn) AS num FROM borrowtopic WHERE user_ssn =?",(user,))
+   record = cur.fetchall()
+   return render_template("user_record_search.html",record = record)
+
+
 if __name__ == '__main__':
+<<<<<<< HEAD
     app.run(
       port = 5003,
       debug = True
       )
+=======
+    app.run(debug=True)
+
+
+
+>>>>>>> 0489cf9cfab5500f94971b1918c4830af648f868

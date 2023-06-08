@@ -1,0 +1,430 @@
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 447-423-380
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: connecting to 127.0.0.1:9092 [('127.0.0.1', 9092) IPv4]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+WARNING:kafka.coordinator.consumer:group_id is None: disabling auto-commit.
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ('borrow_events',)
+INFO:kafka.consumer.subscription_state:Updated partition assignment: [TopicPartition(topic='borrow_events', partition=0)]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connected> [IPv4 ('127.0.0.1', 9092)]>: Closing connection. 
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: connecting to 127.0.0.1:9092 [('127.0.0.1', 9092) IPv4]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+WARNING:kafka.coordinator.consumer:group_id is None: disabling auto-commit.
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ('borrow_events',)
+INFO:kafka.consumer.subscription_state:Updated partition assignment: [TopicPartition(topic='borrow_events', partition=0)]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connected> [IPv4 ('127.0.0.1', 9092)]>: Closing connection. 
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: connecting to 127.0.0.1:9092 [('127.0.0.1', 9092) IPv4]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+WARNING:kafka.coordinator.consumer:group_id is None: disabling auto-commit.
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ('borrow_events',)
+INFO:kafka.consumer.subscription_state:Updated partition assignment: [TopicPartition(topic='borrow_events', partition=0)]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connected> [IPv4 ('127.0.0.1', 9092)]>: Closing connection. 
+INFO:werkzeug: * Detected change in 'C:\\Users\\heng\\Desktop\\LMS_kafka_project\\app.py', reloading
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 447-423-380
+INFO:werkzeug: * Detected change in 'C:\\Users\\heng\\Desktop\\LMS_kafka_project\\app.py', reloading
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 447-423-380
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: connecting to 127.0.0.1:9092 [('127.0.0.1', 9092) IPv4]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ('borrow_events',)
+INFO:kafka.cluster:Group coordinator for my_group is BrokerMetadata(nodeId='coordinator-0', host='192.168.0.18', port=9092, rack=None)
+INFO:kafka.coordinator:Discovered coordinator coordinator-0 for group my_group
+INFO:kafka.coordinator:Starting new heartbeat thread
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions set() for group my_group
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connected> [IPv4 ('127.0.0.1', 9092)]>: Closing connection. 
+INFO:kafka.coordinator:(Re-)joining group my_group
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: connecting to 127.0.0.1:9092 [('127.0.0.1', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: Connection complete.
+INFO:kafka.coordinator:Elected group leader -- performing partition assignments using range
+INFO:kafka.coordinator:Successfully joined group my_group with generation 11
+INFO:kafka.consumer.subscription_state:Updated partition assignment: [TopicPartition(topic='borrow_events', partition=0)]
+INFO:kafka.coordinator.consumer:Setting newly assigned partitions {TopicPartition(topic='borrow_events', partition=0)} for group my_group
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connected> [IPv4 ('127.0.0.1', 9092)]>: Closing connection. 
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: connecting to 127.0.0.1:9092 [('127.0.0.1', 9092) IPv4]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ('borrow_events',)
+INFO:kafka.cluster:Group coordinator for my_group is BrokerMetadata(nodeId='coordinator-0', host='192.168.0.18', port=9092, rack=None)
+INFO:kafka.coordinator:Discovered coordinator coordinator-0 for group my_group
+INFO:kafka.coordinator:Starting new heartbeat thread
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions set() for group my_group
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connected> [IPv4 ('127.0.0.1', 9092)]>: Closing connection. 
+INFO:kafka.coordinator:(Re-)joining group my_group
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: connecting to 127.0.0.1:9092 [('127.0.0.1', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: Connection complete.
+WARNING:kafka.coordinator:Heartbeat failed for group my_group because it is rebalancing
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions {TopicPartition(topic='borrow_events', partition=0)} for group my_group
+INFO:kafka.coordinator:(Re-)joining group my_group
+INFO:kafka.coordinator:Elected group leader -- performing partition assignments using range
+INFO:kafka.coordinator:Successfully joined group my_group with generation 12
+INFO:kafka.coordinator:Successfully joined group my_group with generation 12
+INFO:kafka.consumer.subscription_state:Updated partition assignment: [TopicPartition(topic='borrow_events', partition=0)]
+INFO:kafka.consumer.subscription_state:Updated partition assignment: []
+INFO:kafka.coordinator.consumer:Setting newly assigned partitions {TopicPartition(topic='borrow_events', partition=0)} for group my_group
+INFO:kafka.coordinator.consumer:Setting newly assigned partitions set() for group my_group
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connected> [IPv4 ('127.0.0.1', 9092)]>: Closing connection. 
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 447-423-380
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2023 01:09:50] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2023 01:09:50] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+INFO:kafka.producer.kafka:Closing the Kafka producer with 4294967.0 secs timeout.
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connected> [IPv4 ('192.168.0.18', 9092)]>: Closing connection. 
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2023 01:09:55] "[32mPOST /r_signin HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2023 01:09:56] "GET /r_member HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2023 01:10:07] "GET / HTTP/1.1" 200 -
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: connecting to 127.0.0.1:9092 [('127.0.0.1', 9092) IPv4]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ('borrow_events',)
+INFO:kafka.cluster:Group coordinator for console-consumer-92809 is BrokerMetadata(nodeId='coordinator-0', host='192.168.0.18', port=9092, rack=None)
+INFO:kafka.coordinator:Discovered coordinator coordinator-0 for group console-consumer-92809
+INFO:kafka.coordinator:Starting new heartbeat thread
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions set() for group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connected> [IPv4 ('127.0.0.1', 9092)]>: Closing connection. 
+INFO:kafka.coordinator:(Re-)joining group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: connecting to 127.0.0.1:9092 [('127.0.0.1', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connecting> [IPv4 ('127.0.0.1', 9092)]>: Connection complete.
+INFO:kafka.coordinator:Elected group leader -- performing partition assignments using range
+INFO:kafka.coordinator:Successfully joined group console-consumer-92809 with generation 3
+INFO:kafka.consumer.subscription_state:Updated partition assignment: [TopicPartition(topic='borrow_events', partition=0)]
+INFO:kafka.coordinator.consumer:Setting newly assigned partitions {TopicPartition(topic='borrow_events', partition=0)} for group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=127.0.0.1:9092 <connected> [IPv4 ('127.0.0.1', 9092)]>: Closing connection. 
+INFO:werkzeug: * Detected change in 'C:\\Users\\heng\\Desktop\\LMS_kafka_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 447-423-380
+INFO:werkzeug: * Detected change in 'C:\\Users\\heng\\Desktop\\LMS_kafka_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 447-423-380
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 447-423-380
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 447-423-380
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2023 01:12:07] "GET /r_member HTTP/1.1" 200 -
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ('borrow_events',)
+INFO:kafka.cluster:Group coordinator for console-consumer-92809 is BrokerMetadata(nodeId='coordinator-0', host='192.168.0.18', port=9092, rack=None)
+INFO:kafka.coordinator:Discovered coordinator coordinator-0 for group console-consumer-92809
+INFO:kafka.coordinator:Starting new heartbeat thread
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions set() for group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+INFO:kafka.coordinator:(Re-)joining group console-consumer-92809
+INFO:kafka.coordinator:Elected group leader -- performing partition assignments using range
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.coordinator:Successfully joined group console-consumer-92809 with generation 5
+INFO:kafka.consumer.subscription_state:Updated partition assignment: [TopicPartition(topic='borrow_events', partition=0)]
+INFO:kafka.coordinator.consumer:Setting newly assigned partitions {TopicPartition(topic='borrow_events', partition=0)} for group console-consumer-92809
+INFO:werkzeug: * Detected change in 'C:\\Users\\heng\\Desktop\\LMS_kafka_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 447-423-380
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ('borrow_events',)
+INFO:kafka.cluster:Group coordinator for console-consumer-92809 is BrokerMetadata(nodeId='coordinator-0', host='192.168.0.18', port=9092, rack=None)
+INFO:kafka.coordinator:Discovered coordinator coordinator-0 for group console-consumer-92809
+INFO:kafka.coordinator:Starting new heartbeat thread
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions set() for group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+INFO:kafka.coordinator:(Re-)joining group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+INFO:werkzeug: * Detected change in 'C:\\Users\\heng\\Desktop\\LMS_kafka_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 447-423-380
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ('borrow_events',)
+INFO:kafka.cluster:Group coordinator for console-consumer-92809 is BrokerMetadata(nodeId='coordinator-0', host='192.168.0.18', port=9092, rack=None)
+INFO:kafka.coordinator:Discovered coordinator coordinator-0 for group console-consumer-92809
+INFO:kafka.coordinator:Starting new heartbeat thread
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions set() for group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+INFO:kafka.coordinator:(Re-)joining group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ('borrow_events',)
+INFO:kafka.cluster:Group coordinator for console-consumer-92809 is BrokerMetadata(nodeId='coordinator-0', host='192.168.0.18', port=9092, rack=None)
+INFO:kafka.coordinator:Discovered coordinator coordinator-0 for group console-consumer-92809
+INFO:kafka.coordinator:Starting new heartbeat thread
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions set() for group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+INFO:kafka.coordinator:(Re-)joining group console-consumer-92809
+INFO:kafka.coordinator:(Re-)joining group console-consumer-92809
+INFO:kafka.coordinator:Elected group leader -- performing partition assignments using range
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.coordinator:Successfully joined group console-consumer-92809 with generation 7
+INFO:kafka.consumer.subscription_state:Updated partition assignment: [TopicPartition(topic='borrow_events', partition=0)]
+INFO:kafka.coordinator:Successfully joined group console-consumer-92809 with generation 7
+INFO:kafka.consumer.subscription_state:Updated partition assignment: []
+INFO:kafka.coordinator.consumer:Setting newly assigned partitions {TopicPartition(topic='borrow_events', partition=0)} for group console-consumer-92809
+INFO:kafka.coordinator.consumer:Setting newly assigned partitions set() for group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:werkzeug: * Detected change in 'C:\\Users\\heng\\Desktop\\LMS_kafka_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 447-423-380
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ('borrow_events',)
+INFO:kafka.cluster:Group coordinator for console-consumer-92809 is BrokerMetadata(nodeId='coordinator-0', host='192.168.0.18', port=9092, rack=None)
+INFO:kafka.coordinator:Discovered coordinator coordinator-0 for group console-consumer-92809
+INFO:kafka.coordinator:Starting new heartbeat thread
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions set() for group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+INFO:kafka.coordinator:(Re-)joining group console-consumer-92809
+INFO:kafka.coordinator:Elected group leader -- performing partition assignments using range
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.coordinator:Successfully joined group console-consumer-92809 with generation 8
+INFO:kafka.consumer.subscription_state:Updated partition assignment: [TopicPartition(topic='borrow_events', partition=0)]
+INFO:kafka.coordinator.consumer:Setting newly assigned partitions {TopicPartition(topic='borrow_events', partition=0)} for group console-consumer-92809
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 447-423-380
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ('borrow_events',)
+INFO:kafka.cluster:Group coordinator for console-consumer-92809 is BrokerMetadata(nodeId='coordinator-0', host='192.168.0.18', port=9092, rack=None)
+INFO:kafka.coordinator:Discovered coordinator coordinator-0 for group console-consumer-92809
+INFO:kafka.coordinator:Starting new heartbeat thread
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions set() for group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+INFO:kafka.coordinator:(Re-)joining group console-consumer-92809
+INFO:kafka.coordinator:Elected group leader -- performing partition assignments using range
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.coordinator:Successfully joined group console-consumer-92809 with generation 12
+INFO:kafka.consumer.subscription_state:Updated partition assignment: [TopicPartition(topic='borrow_events', partition=0)]
+INFO:kafka.coordinator.consumer:Setting newly assigned partitions {TopicPartition(topic='borrow_events', partition=0)} for group console-consumer-92809
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2023 01:30:19] "GET / HTTP/1.1" 200 -
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+INFO:kafka.producer.kafka:Closing the Kafka producer with 4294967.0 secs timeout.
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connected> [IPv4 ('192.168.0.18', 9092)]>: Closing connection. 
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2023 01:30:25] "[32mPOST /r_signin HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2023 01:30:26] "GET /r_member HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2023 01:30:30] "GET /book_available HTTP/1.1" 200 -
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connected> [IPv4 ('192.168.0.18', 9092)]>: Closing connection. 
+INFO:werkzeug:127.0.0.1 - - [07/Jun/2023 01:30:32] "GET /borrow?book=9789865535667 HTTP/1.1" 200 -
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ('borrow_events',)
+INFO:kafka.cluster:Group coordinator for console-consumer-92809 is BrokerMetadata(nodeId='coordinator-0', host='192.168.0.18', port=9092, rack=None)
+INFO:kafka.coordinator:Discovered coordinator coordinator-0 for group console-consumer-92809
+INFO:kafka.coordinator:Starting new heartbeat thread
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions set() for group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+INFO:kafka.coordinator:(Re-)joining group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+WARNING:kafka.coordinator:Heartbeat failed for group console-consumer-92809 because it is rebalancing
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions {TopicPartition(topic='borrow_events', partition=0)} for group console-consumer-92809
+INFO:kafka.coordinator:(Re-)joining group console-consumer-92809
+INFO:kafka.coordinator:Elected group leader -- performing partition assignments using range
+INFO:kafka.coordinator:Successfully joined group console-consumer-92809 with generation 13
+INFO:kafka.consumer.subscription_state:Updated partition assignment: [TopicPartition(topic='borrow_events', partition=0)]
+INFO:kafka.coordinator:Successfully joined group console-consumer-92809 with generation 13
+INFO:kafka.coordinator.consumer:Setting newly assigned partitions {TopicPartition(topic='borrow_events', partition=0)} for group console-consumer-92809
+INFO:kafka.consumer.subscription_state:Updated partition assignment: []
+INFO:kafka.coordinator.consumer:Setting newly assigned partitions set() for group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ('borrow_events',)
+INFO:kafka.cluster:Group coordinator for console-consumer-92809 is BrokerMetadata(nodeId='coordinator-0', host='192.168.0.18', port=9092, rack=None)
+INFO:kafka.coordinator:Discovered coordinator coordinator-0 for group console-consumer-92809
+INFO:kafka.coordinator:Starting new heartbeat thread
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions set() for group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+INFO:kafka.coordinator:(Re-)joining group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+WARNING:kafka.coordinator:Heartbeat failed for group console-consumer-92809 because it is rebalancing
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions {TopicPartition(topic='borrow_events', partition=0)} for group console-consumer-92809
+INFO:kafka.coordinator:(Re-)joining group console-consumer-92809
+WARNING:kafka.coordinator:Heartbeat failed for group console-consumer-92809 because it is rebalancing
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions set() for group console-consumer-92809
+INFO:kafka.coordinator:(Re-)joining group console-consumer-92809
+INFO:kafka.coordinator:Elected group leader -- performing partition assignments using range
+INFO:kafka.coordinator:Successfully joined group console-consumer-92809 with generation 14
+INFO:kafka.coordinator:Successfully joined group console-consumer-92809 with generation 14
+INFO:kafka.consumer.subscription_state:Updated partition assignment: []
+INFO:kafka.coordinator:Successfully joined group console-consumer-92809 with generation 14
+INFO:kafka.consumer.subscription_state:Updated partition assignment: [TopicPartition(topic='borrow_events', partition=0)]
+INFO:kafka.coordinator.consumer:Setting newly assigned partitions {TopicPartition(topic='borrow_events', partition=0)} for group console-consumer-92809
+INFO:kafka.consumer.subscription_state:Updated partition assignment: []
+INFO:kafka.coordinator.consumer:Setting newly assigned partitions set() for group console-consumer-92809
+INFO:kafka.coordinator.consumer:Setting newly assigned partitions set() for group console-consumer-92809
+INFO:werkzeug: * Detected change in 'C:\\Users\\heng\\Desktop\\LMS_kafka_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 447-423-380
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ('borrow_events',)
+INFO:kafka.cluster:Group coordinator for console-consumer-92809 is BrokerMetadata(nodeId='coordinator-0', host='192.168.0.18', port=9092, rack=None)
+INFO:kafka.coordinator:Discovered coordinator coordinator-0 for group console-consumer-92809
+INFO:kafka.coordinator:Starting new heartbeat thread
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions set() for group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+INFO:kafka.coordinator:(Re-)joining group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: connecting to localhost:9092 [('::1', 9092, 0, 0) IPv6]
+INFO:kafka.conn:Probing node bootstrap-0 broker version
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connecting> [IPv6 ('::1', 9092, 0, 0)]>: Connection complete.
+INFO:kafka.conn:Broker version identified as 2.5.0
+INFO:kafka.conn:Set configuration api_version=(2, 5, 0) to skip auto check_version requests on startup
+INFO:kafka.consumer.subscription_state:Updating subscribed topics to: ('borrow_events',)
+INFO:kafka.cluster:Group coordinator for console-consumer-92809 is BrokerMetadata(nodeId='coordinator-0', host='192.168.0.18', port=9092, rack=None)
+INFO:kafka.coordinator:Discovered coordinator coordinator-0 for group console-consumer-92809
+INFO:kafka.coordinator:Starting new heartbeat thread
+INFO:kafka.coordinator.consumer:Revoking previously assigned partitions set() for group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=coordinator-0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.conn:<BrokerConnection node_id=bootstrap-0 host=localhost:9092 <connected> [IPv6 ('::1', 9092, 0, 0)]>: Closing connection. 
+INFO:kafka.coordinator:(Re-)joining group console-consumer-92809
+INFO:kafka.coordinator:Elected group leader -- performing partition assignments using range
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:kafka.coordinator:Successfully joined group console-consumer-92809 with generation 15
+INFO:kafka.coordinator:Successfully joined group console-consumer-92809 with generation 15
+INFO:kafka.consumer.subscription_state:Updated partition assignment: []
+INFO:kafka.consumer.subscription_state:Updated partition assignment: [TopicPartition(topic='borrow_events', partition=0)]
+INFO:kafka.coordinator.consumer:Setting newly assigned partitions set() for group console-consumer-92809
+INFO:kafka.coordinator.consumer:Setting newly assigned partitions {TopicPartition(topic='borrow_events', partition=0)} for group console-consumer-92809
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: connecting to 192.168.0.18:9092 [('192.168.0.18', 9092) IPv4]
+INFO:kafka.conn:<BrokerConnection node_id=0 host=192.168.0.18:9092 <connecting> [IPv4 ('192.168.0.18', 9092)]>: Connection complete.
+INFO:werkzeug: * Detected change in 'C:\\Users\\heng\\Desktop\\LMS_kafka_project\\app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat

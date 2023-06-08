@@ -62,3 +62,10 @@ CREATE TABLE logintopic (
     `user_name` TEXT,
     `behavior` TEXT
 );
+
+CREATE TABLE searchtopic (
+    `No` INTEGER PRIMARY KEY ASC AUTOINCREMENT,
+    `user_ssn` TEXT,
+    `user_name` TEXT,
+    `behavior` TEXT
+);

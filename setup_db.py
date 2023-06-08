@@ -135,3 +135,18 @@ with db:
             'INSERT INTO logintopic(user_ssn, user_name, behavior) VALUES ("123456789","jeff","login")'
         )
 print ("logintopic table created successfully")
+
+
+db = sqlite3.connect('searchtopic.db')
+with db:
+    cursor = db.cursor()
+    # 檢查資料表是否已存在
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='searchtopic'")
+    result = cursor.fetchone()
+    if result is None:
+        db.executescript(create_db_sql)
+        cursor = db.cursor()
+        cursor.execute(
+            'INSERT INTO searchtopic(user_ssn, user_name, behavior) VALUES ("123456789","jeff","search")'
+        )
+print ("searchtopic table created successfully")

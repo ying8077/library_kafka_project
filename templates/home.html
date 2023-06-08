@@ -7,6 +7,7 @@
 	<title>首頁</title>
 	<meta name="google" content="notranslate">
 	<link rel=stylesheet type="text/css" href="/static/styles/header.css">
+	<link rel=stylesheet type="text/css" href="/static/styles/search.css">
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -19,18 +20,18 @@
 			<div class='header_right'>
 				<div>最新消息</div>
 				<div>關於我們</div>
-				<a href="/signIn" class='btn_login'>登入</a>
+				<a href="/login" class='btn_login'>登入</a>
 			</div>
 		</div>
 	</header>
 	<div>
 		<img class="w-full" src="./static/images/banner.png" alt="banner" />
 	</div>
-	<div class='w-9/12 mx-auto -mt-12 p-6 search'>
-		<input class='w-full p-6 search_input' type="text" placeholder='請輸入關鍵字' />
-		<img class='search_icon' src="./static/images/search.png" />
+	<form action="/book_search" class='w-9/12 mx-auto -mt-12 p-6 search'>
+		<input class='w-full p-6 search_input' type="text" name="book_search" placeholder='請輸入關鍵字' />
+		<input type="image" class='search_icon' src="./static/images/search.png" alt="Submit">
 		<img class='mt-2' src="./static/images/line.png" />
-	</div>
+	</form>
 	</div>
 	<div class='my-48'>
 		<h3 class='flex_center text-4xl font-bold'>新書推薦</h3>
@@ -55,34 +56,6 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-	}
-
-	.search {
-		border-radius: 5px;
-		position: relative;
-		z-index: 5;
-		background-color: #ffffff;
-		box-shadow: 0 4px 16px rgba(141, 211, 187, 0.15);
-	}
-
-	.search_input {
-		border-radius: 5px;
-		position: relative;
-		font-size: larger;
-		border: 2px solid #7c797e;
-	}
-
-	.search_input:active,
-	.search_input:focus {
-		outline: none;
-	}
-
-	.search_icon {
-		width: 36px;
-		height: 36px;
-		position: absolute;
-		right: 48px;
-		bottom: 60px;
 	}
 
 	.book {

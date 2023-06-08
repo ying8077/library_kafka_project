@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session,  jsonify
 from kafka import KafkaProducer, KafkaConsumer
 import sqlite3 as sql
 import datetime
@@ -13,9 +13,10 @@ def substract(title):
     title = title[:max_length] + '...'
   return title
 
-def line_break(description):
-   
-   return
+def defaultImg(img):
+  if img == '':
+    img = '/default.jpeg'
+  return img
 
 def write_event(topic, msg):
     producer = KafkaProducer(bootstrap_servers='localhost:9092')
@@ -159,28 +160,62 @@ def book(id):
   return render_template('book.html', book=book)
 
 # 讀者登入，每次登入就記錄到topic(kafka log)   
+# @app.route('/r_signin',methods = ['POST'])
+# def r_signin():
+#   con = sql.connect("readers.db")
+#   con.row_factory = sql.Row
+#   cur = con.cursor()
+#   rname=request.form["rname"]
+#   rpassword=request.form["password"]
+#   cur.execute("SELECT * FROM readers WHERE rname=? and password=?", (rname, rpassword))
+#   people = cur.fetchall()
+#   if len(people) == 0:
+#       return redirect("/result?msg=帳號或密碼錯誤")
+#   cur.execute("SELECT ssn FROM readers WHERE rname=? and password=?", (rname, rpassword,))
+#   ssn = cur.fetchone()[0]
+#   session["reader"] = rname
+#   session["ssn"] = ssn
+#   send_login_event(ssn, rname)
+#   return redirect("/")
+
+#讀者登入，每次登入就記錄到topic(kafka log)   
 @app.route('/r_signin',methods = ['POST'])
 def r_signin():
+  print('testtttt')
   con = sql.connect("readers.db")
   con.row_factory = sql.Row
   cur = con.cursor()
-  rname=request.form["rname"]
-  rpassword=request.form["password"]
+  data = request.get_json()
+  print('1111111111',data.get('rname'))
+  rname = data.get('rname')
+  rpassword = data.get('password')
   cur.execute("SELECT * FROM readers WHERE rname=? and password=?", (rname, rpassword))
   people = cur.fetchall()
   if len(people) == 0:
-      return redirect("/result?msg=帳號或密碼錯誤")
+      data = {
+         "status": "error",
+      }
+      return jsonify(data)
   cur.execute("SELECT ssn FROM readers WHERE rname=? and password=?", (rname, rpassword,))
   ssn = cur.fetchone()[0]
   session["reader"] = rname
   session["ssn"] = ssn
   send_login_event(ssn, rname)
-  return redirect("/r_member")
+  data = {
+      "status": "success",
+      "rname": session["reader"],
+      "ssn": session["ssn"]
+  }
+  return jsonify(data)
 
 # 讀者註冊
 @app.route('/new_reader')
 def new_reader():
     return render_template('new_reader.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
 @app.route('/r_signup',methods = ['POST'])
 def r_signup():
@@ -213,15 +248,16 @@ def r_signout():
 
 # 任何訪客搜尋書本，都會被記錄到log
 @app.route('/book_search')
-def books():
+def book_search():
     book_name = request.args.get("book_search")
     con = sql.connect("books.db")
     con.row_factory = sql.Row
     cur = con.cursor()
-    cur.execute("select * from books where title LIKE '%{}%'".format(book_name))
+    cur.execute("select * from books where title LIKE '%{}%' order by id desc".format(book_name))
     books = cur.fetchall()
-    send_search_history(book_name)
-    return render_template("book_search.html", book_search = books)
+    if book_name != '': 
+      send_search_history(book_name)
+    return render_template("book_search.html", books = books, default=defaultImg)
 
 # 讀者查看個人資料
 @app.route('/r_profile')

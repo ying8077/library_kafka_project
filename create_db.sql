@@ -47,3 +47,18 @@ CREATE TABLE reports (
     FOREIGN KEY(`book_no`) REFERENCES `books`(`ISBN`) ON DELETE CASCADE
     FOREIGN KEY(`title`) REFERENCES `books`(`title`) ON DELETE CASCADE
 );
+
+CREATE TABLE borrowtopic (
+    `No` INTEGER PRIMARY KEY ASC AUTOINCREMENT,
+    `user_ssn` TEXT,
+    `user_name` TEXT,
+    `behavior` TEXT,
+    `book_name` TEXT
+);
+
+CREATE TABLE logintopic (
+    `No` INTEGER PRIMARY KEY ASC AUTOINCREMENT,
+    `user_ssn` TEXT,
+    `user_name` TEXT,
+    `behavior` TEXT
+);

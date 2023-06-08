@@ -17,11 +17,29 @@ def write_event(topic, msg):
 
 # 建立kafka主題：登入事件
 def send_login_event(ssn, name):
+    msgList = []
     topic = 'login_events'
+    consumer = KafkaConsumer(topic, bootstrap_servers=['localhost:9092'], group_id='my_group', auto_offset_reset="earliest")
     message = f'{{"user_ssn": "{ssn}", "user_name": "{name}", "behavior": "log in"}}'
     write_event(topic, message)
-
-#建立kafka主題："登出事件"事件
+    c = consumer
+    for user in c:
+      msgList.append(user.value.decode('utf-8'))
+      break
+    consumer.close()
+    if (len(msgList) != 0):
+      for m in msgList:
+          temp = eval(m)
+          try:
+              with sql.connect("logintopic.db") as con:
+                  cur = con.cursor()
+                  cur.execute("INSERT INTO logintopic (user_ssn, user_name, behavior) VALUES (?,?,?)",(temp.get('user_ssn'), temp.get('user_name'), 'login') )
+                  con.commit()
+          except:
+            con.rollback()
+          finally:
+            con.close()
+# 建立kafka主題："登出事件"事件
 def send_logout_event(ssn, name):
     topic = 'logout_events'
     message = f'{{"user_ssn": "{ssn}", "user_name": "{name}", "behavior": "log out"}}'
@@ -38,8 +56,7 @@ def send_search_history(book_name):
       rname = "visitor"
       ssn = "visitor"
     message = f'{{"user_ssn": "{ssn}", "user_name": "{rname}", "behavior": "search", "book_name": "{book_name}"}}'
-    producer.send(topic, message.encode('utf-8'))
-    producer.close()
+    write_event(topic, message)
 
     msgList = []
     consumer = KafkaConsumer(topic, bootstrap_servers=['localhost:9092'], group_id='my_group', auto_offset_reset="earliest")
@@ -64,11 +81,28 @@ def send_search_history(book_name):
 
 # 建立kafka主題："借書事件"事件
 def send_borrow_event(ssn, user, book_name):
-    producer = KafkaProducer(bootstrap_servers='localhost:9092')
+    msgList = []
     topic = 'borrow_events'
     message = f'{{"user_ssn": "{ssn}", "user_name": "{user}", "behavior": "borrow" ,"book_name":"{book_name}"}}'
-    producer.send(topic, message.encode())
-    producer.close()
+    write_event(topic,message)
+    consumer = KafkaConsumer(topic, bootstrap_servers=['localhost:9092'], group_id='my_group', auto_offset_reset="earliest")
+    c = consumer
+    for user in c:
+      msgList.append(user.value.decode('utf-8'))
+      break
+    consumer.close()
+    if (len(msgList) != 0):
+      for m in msgList:
+          temp = eval(m)
+          try:
+              with sql.connect("borrowtopic.db") as con:
+                  cur = con.cursor()
+                  cur.execute("INSERT INTO borrowtopic (user_ssn, user_name, behavior, book_name) VALUES (?,?,?,?)",(temp.get('user_ssn'), temp.get('user_name'), 'borrow', temp.get('book_name')) )
+                  con.commit()
+          except:
+            con.rollback()
+          finally:
+            con.close()
 
     msgList = []
     consumer = KafkaConsumer(topic, bootstrap_servers=['localhost:9092'], group_id='my_group', auto_offset_reset="earliest")
@@ -95,11 +129,9 @@ def send_borrow_event(ssn, user, book_name):
 
 # 建立kafka主題："還書事件"事件
 def send_return_event(ssn, user, book_name):
-    producer = KafkaProducer(bootstrap_servers='localhost:9092')
     topic = 'return_events'
     message = f'{{"user_ssn": "{ssn}", "user_name": "{user}", "behavior": "return" ,"book_name":"{book_name}"}}'
-    producer.send(topic, message.encode())
-    producer.close()
+    write_event(topic,message)
 
 # 讀者登入，每次登入就記錄到topic(kafka log)   
 @app.route('/r_signin',methods = ['POST'])
@@ -520,7 +552,6 @@ def borrow_result():
     message2 = request.args.get("msg2", "發生錯誤，請聯繫圖書館")
     return render_template("result.html", msg1=message1, msg2=message2)
 
-
 @app.route('/supervise')
 def all():
   def super_user_record():
@@ -535,12 +566,12 @@ def all():
       print(row["user_name"])
       print(row["book_name"])
     return data
-
+  
   def super_frquent_user():
     con = sql.connect("logintopic.db")
     con.row_factory = sql.Row
     cur = con.cursor()
-    cur.execute("SELECT * FROM logintopic")
+    cur.execute("SELECT user_ssn, user_name, COUNT(user_ssn) AS num FROM logintopic GROUP BY user_ssn ORDER BY COUNT(user_ssn) DESC")
     data = cur.fetchall()
     con.close()
     for row in data:
@@ -570,36 +601,21 @@ def all():
       print(row["book_name"])
     return data
   
-  return render_template("supervise.html",record = super_frquent_user(), record2 = super_user_record(), record3 = super_book_borrowed(), record4 = super_book_searched())
+  return render_template("supervise.html",freq = super_frquent_user(), borrow = super_user_record(), bookborrow = super_book_borrowed(), search = super_book_searched())
+
+@app.route("/user_record_search")
+def userRecordSearch():
+   user = request.args.get("user_search")
+   con = sql.connect("borrowtopic.db")
+   con.row_factory = sql.Row
+   cur = con.cursor()
+   cur.execute("SELECT user_ssn, user_name,GROUP_CONCAT(book_name , ',') AS books, COUNT(user_ssn) AS num FROM borrowtopic WHERE user_ssn =?",(user,))
+   record = cur.fetchall()
+   return render_template("user_record_search.html",record = record)
 
 
 if __name__ == '__main__':
     app.run(debug=True)
 
-# consumer 監控
-# 最常被借閱的書
-# @app.route('/super_book_borrowed')
-# def super_book_borrowed():
-#     bbmsg = []
-#     consumer = KafkaConsumer('borrow_events', bootstrap_servers='localhost:9092', group_id='None', auto_offset_reset='earliest')
-#     # consumer.partitions_for_topic('borrow_events')
-#     # consumer.seek_to_beginning()  
-#     for message in consumer:
-#       # print(f"Received message: {message.value.decode('utf-8')}")
-#       bbmsg.append(f"{message.value.decode('utf-8')}")
-#     print(bbmsg)
-#     consumer.close()
-    
-#     return render_template("supervise.html", msg=bbmsg)
 
 
-# def super_book_searched():
-#     # 建立消費者
-#     consumer = KafkaConsumer('search_history', bootstrap_servers='localhost:9092', group_id='my_group')
-
-#     # 消費訊息
-#     for message in consumer:
-#         print(f"Received message: {message.value.decode('utf-8')}")
-
-#     # 關閉消费者
-#     consumer.close()

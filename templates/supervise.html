@@ -1,12 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- <h2>{{freq}}</h2> -->
+   
+
 </head>
+
 <body>
-    
+    <h2>所有借書紀錄</h2>
+    <form action="/user_record_search">
+      請輸入user_ssn
+      <input type="text" name="user_search"/>
+      <button>查詢</button>
+    </form>
+    <table border=1>
+        <thead>
+            <td>ssn</td>
+            <td>name</td>
+            <td>書名</td>
+        </thead>
+        {% for row in borrow %}
+        <tr>
+            <td>{{row["user_ssn"]}}</td>
+            <td>{{row["user_name"]}}</td>
+            <td >{{row["book_name"]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>登入紀錄</h2>
+    <table border=1>
+        <thead>
+            <td>ssn</td>
+            <td>name</td>
+            <td>近期登入次數</td>
+        </thead>
+        {% for row in freq %}
+        <tr>
+            <td>{{row["user_ssn"]}}</td>
+            <td>{{row["user_name"]}}</td>
+            <td>{{row["num"]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
 </body>
+
 </html>

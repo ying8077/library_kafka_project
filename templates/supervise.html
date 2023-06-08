@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>使用者最常借閱的書籍</h1>
+    <table border = 1>
+         <thead>
+            <td>書名</td>
+            <td>次數</td>
+         </thead>
+         {% for row in record3 %}  
+            <tr>
+               <td>{{row["book_name"]}}</td>
+               <td>{{row["num"]}}</td>
+            </tr>
+         {% endfor %}
+      </table>
+
+
+    <h1>使用者最常查詢的書籍</h1>
+    <table border = 1>
+         <thead>
+            <td>書名</td>
+            <td>次數</td>
+         </thead>
+         {% for row in record4 %}  
+            <tr>
+               <td>{{row["book_name"]}}</td>
+               <td>{{row["num"]}}</td>
+            </tr>
+         {% endfor %}
+      </table>
+    
+</body>
+
+</html>

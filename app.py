@@ -29,9 +29,7 @@ def send_login_event(ssn, name):
     consumer.close()
     if (len(msgList) != 0):
       for m in msgList:
-          print(eval(m))
           temp = eval(m)
-          # print(temp.get('user_name'))
           try:
               with sql.connect("logintopic.db") as con:
                   cur = con.cursor()
@@ -48,7 +46,6 @@ def send_logout_event(ssn, name):
     write_event(topic, message)
 
 # 建立kafka主題："搜尋書本"事件
-# 開consumer前要先輸入chcp 65001(UTF-8)，把亂碼轉成中文
 def send_search_history(book_name):
     producer = KafkaProducer(bootstrap_servers='localhost:9092')
     topic = 'search_history'
@@ -59,8 +56,28 @@ def send_search_history(book_name):
       rname = "visitor"
       ssn = "visitor"
     message = f'{{"user_ssn": "{ssn}", "user_name": "{rname}", "behavior": "search", "book_name": "{book_name}"}}'
-    producer.send(topic, message.encode('utf-8'))
-    producer.close()
+    write_event(topic, message)
+
+    msgList = []
+    consumer = KafkaConsumer(topic, bootstrap_servers=['localhost:9092'], group_id='my_group', auto_offset_reset="earliest")
+    c = consumer
+    for user in c:
+      msgList.append(user.value.decode('utf-8'))
+      break
+    consumer.close()
+
+    if (len(msgList) != 0):
+      for m in msgList:
+        temp = eval(m)
+        try:
+          with sql.connect("searchtopic.db") as con:
+            cur = con.cursor()
+            cur.execute("INSERT INTO searchtopic (user_ssn, user_name, behavior, book_name) VALUES(?,?,?,?)",(temp.get('user_ssn'), temp.get('user_name'), temp.get('behavior'), temp.get('book_name')))
+            con.commit()
+        except:
+          con.rollback()
+        finally:
+          con.commit()
 
 # 建立kafka主題："借書事件"事件
 def send_borrow_event(ssn, user, book_name):
@@ -76,9 +93,7 @@ def send_borrow_event(ssn, user, book_name):
     consumer.close()
     if (len(msgList) != 0):
       for m in msgList:
-          print(eval(m))
           temp = eval(m)
-          print(temp.get('user_name'))
           try:
               with sql.connect("borrowtopic.db") as con:
                   cur = con.cursor()
@@ -88,6 +103,29 @@ def send_borrow_event(ssn, user, book_name):
             con.rollback()
           finally:
             con.close()
+
+    msgList = []
+    consumer = KafkaConsumer(topic, bootstrap_servers=['localhost:9092'], group_id='my_group', auto_offset_reset="earliest")
+    c = consumer
+    for user in c:
+      msgList.append(user.value.decode('utf-8'))
+      break
+    consumer.close()
+    
+    if (len(msgList) != 0):
+      for m in msgList:
+        print(eval(m))
+        temp = eval(m)
+        print(temp.get('user_name'))
+        try:
+          with sql.connect("borrowtopic.db") as con:
+            cur = con.cursor()
+            cur.execute("INSERT INTO borrowtopic (user_ssn, user_name, behavior, book_name) VALUES(?,?,?,?)",(temp.get('user_ssn'), temp.get('user_name'), temp.get('behavior'), temp.get('book_name')))
+            con.commit()
+        except:
+          con.rollback()
+        finally:
+          con.commit()
 
 # 建立kafka主題："還書事件"事件
 def send_return_event(ssn, user, book_name):
@@ -357,14 +395,6 @@ def booklist():
 
 
 
-
-
-
-
-
-
-
-
 # 以下為管理員的程式碼，不用看！！！
 @app.route('/report_manage')
 def reports():
@@ -530,7 +560,7 @@ def all():
     cur = con.cursor()
     cur.execute("SELECT user_ssn,user_name,book_name FROM borrowtopic")
     data = cur.fetchall()
-    con.close
+    con.close()
     for row in data:
       print(row["user_ssn"])
       print(row["user_name"])
@@ -543,13 +573,36 @@ def all():
     cur = con.cursor()
     cur.execute("SELECT user_ssn, user_name, COUNT(user_ssn) AS num FROM logintopic GROUP BY user_ssn ORDER BY COUNT(user_ssn) DESC")
     data = cur.fetchall()
-    con.close
-    # for row in data:
-    #   print(row["user_ssn"])
-    #   print(row["user_name"])
+    con.close()
+    for row in data:
+      print(row["user_ssn"])
+      print(row["user_name"])
     return data
+  
+  def super_book_borrowed():
+    con = sql.connect("borrowtopic.db")
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("SELECT book_name, COUNT(book_name) as num FROM borrowtopic GROUP BY book_name")
+    data = cur.fetchall()
+    con.close()
+    for row in data:
+      print(row["book_name"])
+    return data
+  
+  def super_book_searched():
+    con = sql.connect("searchtopic.db")
+    con.row_factory = sql.Row
+    cur = con.cursor()
+    cur.execute("SELECT book_name, COUNT(book_name) as num FROM searchtopic GROUP BY book_name")
+    data = cur.fetchall()
+    con.close()
+    for row in data:
+      print(row["book_name"])
+    return data
+  
+  return render_template("supervise.html",freq = super_frquent_user(), borrow = super_user_record(), bookborrow = super_book_borrowed(), search = super_book_searched())
 
-  return render_template("supervise.html",freq = super_frquent_user(), borrow = super_user_record())
 @app.route("/user_record_search")
 def userRecordSearch():
    user = request.args.get("user_search")

@@ -12,6 +12,7 @@
 </head>
 
 <body>
+    
     <h2>所有借書紀錄</h2>
     <form action="/user_record_search">
       請輸入user_ssn
@@ -48,6 +49,34 @@
         </tr>
         {% endfor %}
     </table>
+
+    <h2>使用者最常被借閱的書籍</h2>
+    <table border = 1>
+         <thead>
+            <td>書名</td>
+            <td>次數</td>
+         </thead>
+         {% for row in bookborrow %}  
+            <tr>
+               <td>{{row["book_name"]}}</td>
+               <td>{{row["num"]}}</td>
+            </tr>
+         {% endfor %}
+      </table>
+
+    <h2>最常被查詢的書籍</h2>
+    <table border = 1>
+         <thead>
+            <td>書名</td>
+            <td>次數</td>
+         </thead>
+         {% for row in search %}  
+            <tr>
+               <td>{{row["book_name"]}}</td>
+               <td>{{row["num"]}}</td>
+            </tr>
+         {% endfor %}
+      </table>
 
 </body>
 

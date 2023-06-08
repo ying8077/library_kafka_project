@@ -3,8 +3,9 @@ from kafka import KafkaProducer, KafkaConsumer
 import sqlite3 as sql
 import datetime
 import json
-
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 app.secret_key = 'nccugogo'
 
 def substract(title):
@@ -188,13 +189,12 @@ def book(id):
 #讀者登入，每次登入就記錄到topic(kafka log)   
 @app.route('/r_signin',methods = ['POST'])
 def r_signin():
-  print('testtttt')
   con = sql.connect("readers.db")
   con.row_factory = sql.Row
   cur = con.cursor()
   data = request.get_json()
-  print('1111111111',data.get('rname'))
-  rname = data.get('rname')
+  print(data)
+  rname = data.get('name')
   rpassword = data.get('password')
   cur.execute("SELECT * FROM readers WHERE rname=? and password=?", (rname, rpassword))
   people = cur.fetchall()

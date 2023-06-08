@@ -31,14 +31,14 @@
         <form>
             <div class="login-ipt-group">
                 <label>姓名</label>
-                <input type="text" class="input" name="rname" />
+                <input id="acc" type="text" class="input" name="rname" />
             </div>
             <div class="login-ipt-group mb-4">
                 <label>密碼</label>
-                <input type="password" class="input" name="password" />
+                <input id="pass" type="password" class="input" name="password" />
             </div>
             <div class="d-grid col-12">
-                <input type="submit" value="登入" class="btn-login" onclick="onSubmit()" />
+                <input value="登入" class="btn-login" onclick="(onSubmit())" />
             </div>
         </form>
         <div class="login-label">
@@ -55,23 +55,33 @@
 </html>
 
 <script>
-    function onSubmit(e) {
-        e.preventDefault();
-
-        const formData = new FormData(event.target);
-        let formObj = Object.fromEntries(formData.entries());
-
-        fetch('http://localhost:5004/r_signin', {
+    function onSubmit() {
+        // e.preventDefault();
+        acc = document.getElementById("acc").value
+        pass = document.getElementById("pass").value
+        // const formData = new FormData(event.target);
+        // let formObj = Object.fromEntries(formData.entries());
+        // console.log(acc)
+        fetch('http://localhost:5000/r_signin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                name: formObj.rname,
-                password: formObj.password,
+                "name": acc,
+                "password": pass,
             })
         })
-            .then(console.log('kkk'))
+            .then(res => res.json())
+            .then(data => {
+                if (data.status == "error") {
+                    alert(data.status)
+                } else {
+                    window.localStorage.setItem("rname", data.rname)
+                    window.localStorage.setItem("ssn", data.ssn)
+                    alert("success")
+                }
+            })
     }
 
 </script>

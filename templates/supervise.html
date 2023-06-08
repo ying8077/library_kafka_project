@@ -6,14 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <h2>{{freq}}</h2> -->
-   
-
+    <style type="text/css">
+        *{
+            margin: 0%;
+        }
+        .title1 {
+        height: 60px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding-left: 8px;
+        background-color:#FFF9F1;
+        color:black
+        }
+        body {
+          /* background-color: #BBDBBF; */
+        }
+    </style>
 </head>
 
 <body>
-    <h2>所有借書紀錄</h2>
-    <form action="/user_record_search">
+    <h2 class="title1" >所有借書紀錄</h2>
+    <form style="background-color:#BBDBBF ;"action="/user_record_search">
       請輸入user_ssn
       <input type="text" name="user_search"/>
       <button>查詢</button>

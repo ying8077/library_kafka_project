@@ -130,31 +130,6 @@ def send_borrow_event(ssn, user, book_name):
             finally:
                 con.close()
 
-    msgList = []
-    consumer = KafkaConsumer(topic, bootstrap_servers=[
-                             'localhost:9092'], group_id='my_group', auto_offset_reset="earliest")
-    c = consumer
-    for user in c:
-        msgList.append(user.value.decode('utf-8'))
-        break
-    consumer.close()
-
-    if (len(msgList) != 0):
-        for m in msgList:
-            print(eval(m))
-            temp = eval(m)
-            print(temp.get('user_name'))
-            try:
-                with sql.connect("borrowtopic.db") as con:
-                    cur = con.cursor()
-                    cur.execute("INSERT INTO borrowtopic (user_ssn, user_name, behavior, book_name) VALUES(?,?,?,?)", (temp.get(
-                        'user_ssn'), temp.get('user_name'), temp.get('behavior'), temp.get('book_name')))
-                    con.commit()
-            except:
-                con.rollback()
-            finally:
-                con.commit()
-
 # 建立kafka主題："還書事件"事件
 
 
@@ -430,14 +405,15 @@ def borrow():
               con2.commit()
               msg1 = "借閱成功！請在" + return_date.strftime('%Y-%m-%d')+"之前歸還，謝謝！"
               with sql.connect("books.db") as con4:
-                  cur = con4.cursor()
-                  cur.execute(
-                      "SELECT title FROM books WHERE ISBN = ?", (ISBN,))
-                  msg2 = cur.fetchone()[0]
-              res = {
-                "msg1": msg1,
-                "msg2": msg2
-              }
+                cur = con4.cursor()
+                cur.execute(
+                    "SELECT title FROM books WHERE ISBN = ?", (ISBN,))
+                con4.commit()
+                msg2 = cur.fetchone()[0]
+                res = {
+                  "msg1": msg1,
+                  "msg2": msg2
+                }
               print(res)
               return jsonify(res)
             else:
@@ -450,7 +426,9 @@ def borrow():
                 print(res)
                 return jsonify(res)
 
-      except:
+      except Exception as e:
+          print("e")
+          print(e)
           con.rollback()
           msg1 = "發生錯誤！請稍後再試！"
           msg2 = "未知"

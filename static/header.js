@@ -14,3 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
 			</div>`;
     }
 });
+
+function signout() {
+	localStorage.removeItem("rname");
+	location.href='/r_signout';
+}

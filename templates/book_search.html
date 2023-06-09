@@ -55,8 +55,11 @@
 </html>
 <script>
    function borrow(isbn) {
-      console.log(isbn)
-      console.log("haha")
+      const reader = localStorage.getItem('rname');
+      if (reader === null) {
+         alert('請先登入！')
+         return
+      }
       fetch('http://localhost:5000/borrow', {
          method: 'POST',
          headers: {

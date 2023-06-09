@@ -4,11 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>註冊帳戶</title>
+    <title>註冊</title>
     <meta name="google" content="notranslate">
- </head>
+    <link rel=stylesheet type="text/css" href="/static/styles/header.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-<body>
+<!-- <body>
     <h1>註冊讀者帳戶</h1>
     <br>
     <div><a href="/">回到首頁</a></div>
@@ -29,6 +31,219 @@
         <input type="password" name="password" /><br><br>
         <button>註冊</button>
     </form>
+</body> -->
+
+<!-- <script>
+    function onSubmit() {
+        // e.preventDefault();
+        name = document.getElementById("name").value
+        id = document.getElementById("id").value
+        address = document.getElementById("address").value
+        email = document.getElementById("email").value
+        phone = document.getElementById("phone").value
+        pass = document.getElementById("pass").value
+        console.log(pass)
+        // const formData = new FormData(event.target);
+        // let formObj = Object.fromEntries(formData.entries());
+        // console.log(acc)
+        fetch('http://localhost:5000/r_signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "name": name,
+                "id"  : id,
+                "address"  : address,
+                "email"  : email,
+                "phone": phone,
+                "pass": pass,
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data["status"] == "error") {
+                    alert(data.status)
+                } else {
+                    alert("success")
+                }
+            })
+    }
+
+</script> -->
+
+<body>
+    <header>
+        <div class="header">
+            <div>
+                <a href="/"><img class="header_logo" src="/static/images/logo.png" /></a>
+            </div>
+            <div class='header_right'>
+                <div>最新消息</div>
+                <div>關於我們</div>
+                <a href="/login" class='btn_login'>登入</a>
+            </div>
+        </div>
+    </header>
+    <div class="login rounded-lg">
+        <div class="login-header">
+            <h3>註冊</h3>
+        </div>
+        <!-- <form> -->
+            <div class="login-ipt-group mt-4">
+                <label>姓名</label>
+                <input id="name" type="text" class="input" name="rname" />
+            </div>
+            <div class="login-ipt-group">
+                <label>身分證字號</label>
+                <input id="id" type="text" class="input" name="password" />
+            </div>
+            <div class="login-ipt-group">
+                <label>地址</label>
+                <input id="address" type="text" class="input" name="password" />
+            </div>
+            <div class="login-ipt-group">
+                <label>信箱</label>
+                <input id="email" type="text" class="input" name="password" />
+            </div>
+            <div class="login-ipt-group">
+                <label>電話</label>
+                <input id="phone" type="text" class="input" name="password" />
+            </div>
+            <div class="login-ipt-group mb-4">
+                <label>設定密碼</label>
+                <input id="pass" type="password" class="input" name="password" />
+            </div>
+            <div class="d-grid col-12">
+                <button class="btn-login" onclick="(onSubmit())">註冊</button>
+            </div>
+        <!-- </form> -->
+    </div>
 </body>
 
 </html>
+<script>
+    function onSubmit() {
+        // e.preventDefault();
+        name = document.getElementById("name").value
+        id = document.getElementById("id").value
+        address = document.getElementById("address").value
+        email = document.getElementById("email").value
+        phone = document.getElementById("phone").value
+        pass = document.getElementById("pass").value
+        fetch('http://localhost:5000/r_signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "name": name,
+                "id"  : id,
+                "address"  : address,
+                "email"  : email,
+                "phone": phone,
+                "pass": pass,
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data["status"] == "error") {
+                    alert(data.status)
+                } else {
+                    alert("Signup success!")
+                    location.assign("/")
+                }
+            })
+    }
+
+</script>
+<style>
+    .login {
+        width: 600px;
+        margin: 200px auto;
+        padding: 24px 36px;
+        border: 1px solid #E1E0E0;
+    }
+
+
+    .login-header {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #E1E0E0;
+    }
+
+    .login-header a {
+        margin-left: auto;
+        color: #a2a2a2;
+    }
+
+    h3 {
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .login form {
+        width: 100%;
+        padding: 30px 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .input {
+        height: 36px;
+    }
+
+    .login-ipt-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .login input {
+        line-height: 28px;
+        padding: 0 10px;
+        border-radius: 5px;
+        border: 1px solid #cacaca;
+        margin-bottom: 8px;
+    }
+
+    .login input:focus,
+    .login input:active {
+        outline: none;
+    }
+
+    .btn-login {
+        width: 100%;
+        height: 40px;
+        font-weight: 600;
+        border-radius: 5px;
+        border: none;
+        margin: 16px 0;
+        font-size: 16px;
+        background-color: #000000;
+        color: #FFFFFF;
+    }
+
+    .login-label label {
+        color: #cacaca;
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+
+    .login-label label::before,
+    .login-label label::after {
+        content: '';
+        flex-grow: 1;
+        height: 1px;
+        background-color: #cacaca;
+    }
+
+    .login-label label::before {
+        margin-right: 20px;
+    }
+
+    .login-label label::after {
+        margin-left: 20px;
+    }
+</style>

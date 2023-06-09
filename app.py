@@ -208,23 +208,30 @@ def login():
 @app.route('/r_signup',methods = ['POST'])
 def r_signup():
       try:
-         rname = request.form["rname"]
-         ssn = request.form["ssn"]
-         address = request.form["address"]
-         mail = request.form["mail"]
-         phone = request.form["phone"]
-         password = request.form["password"]
-         with sql.connect("readers.db") as con:
-            cur = con.cursor()
-            cur.execute("INSERT INTO readers (rname, ssn, address, mail, phone, password) VALUES (?,?,?,?,?,?)",(rname,ssn,address,mail,phone,password) )
-            con.commit()
-            msg = "讀者帳號已成功建立！"
+        with sql.connect("readers.db") as con:
+          con.row_factory = sql.Row
+          cur = con.cursor()
+          data = request.get_json()
+          name = data['name']
+          ssn = data['id']
+          address = data['address']
+          mail = data['email']
+          phone = data['phone']
+          password = data['pass']
+          cur.execute("INSERT INTO readers (rname, ssn, address, mail, phone, password) VALUES (?,?,?,?,?,?)",(name,ssn,address,mail,phone,password) )
+          con.commit()
+          print(name)
+        data = {
+            "status": "success"
+        }
       except:
-         con.rollback()
-         msg = "讀者註冊失敗，請聯絡管理員！"
+        data = {
+            "status": "error"
+        }
+        con.rollback
       finally:
-         con.close()
-         return render_template("result.html",msg = msg)
+         con.close
+      return jsonify(data)
       
 # 讀者登出
 @app.route('/r_signout')
@@ -678,6 +685,4 @@ def userRecordSearch():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
 

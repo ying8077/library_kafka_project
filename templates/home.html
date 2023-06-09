@@ -18,9 +18,9 @@
 				<a href="/"><img class="header_logo" src="/static/images/logo.png" /></a>
 			</div>
 			<div class='header_right'>
-				<div>最新消息</div>
-				<div>關於我們</div>
-				<a href="/login" class='btn_login'>登入</a>
+				<div class="mr-12">最新消息</div>
+				<div class="mr-12">關於我們</div>
+				<div id="btn_container"></div>
 			</div>
 		</div>
 	</header>
@@ -51,6 +51,30 @@
 
 </html>
 
+<script>
+	const contentContainer = document.getElementById("btn_container");
+	const reader = localStorage.getItem('rname');
+
+	document.addEventListener("DOMContentLoaded", function () {
+		if (reader === null) {
+			contentContainer.innerHTML = '<a href="/login" class="btn_login">登入</a>';
+		} else {
+			contentContainer.innerHTML = `
+			<button class='btn_login'>黃金會員</button>
+			<div class="hover px-4 py-6 space-y-2">
+				<a href="/r_borrowed">借書紀錄</a>
+				<div>個人資料</div>
+				<div class="btn_logout" onclick="signout()">登出</div>
+			</div>`;
+		}
+	});
+
+	function signout() {
+		localStorage.removeItem("rname");
+		location.href='/r_signout';
+	}
+</script>
+
 <style>
 	.flex_center {
 		display: flex;
@@ -75,4 +99,28 @@
 	.book_description {
 		font-size: larger;
 	}
+
+	/* #btn_container {
+		position: relative;
+	}
+
+	#btn_container:hover .hover {
+		display: block;
+		position: absolute;
+		left: -28px;
+	}
+
+	.hover {
+		display: none;
+		width: 180px;
+		background-color: #FFFFFF;
+		border-radius: 10px;
+		text-align: center;
+	}
+
+	.btn_logout {
+		color: #2F4F4F;
+		padding-top: 12px;
+		border-top: 1px solid #000;
+	} */
 </style>

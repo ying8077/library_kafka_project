@@ -17,10 +17,10 @@
                 <a href="/"><img class="header_logo" src="/static/images/logo.png" /></a>
             </div>
             <div class='header_right'>
-                <div>最新消息</div>
-                <div>關於我們</div>
-                <a href="/login" class='btn_login'>登入</a>
-            </div>
+				<div class="mr-12">最新消息</div>
+				<div class="mr-12">關於我們</div>
+				<div id="btn_container"></div>
+			</div>
         </div>
     </header>
     {% for row in book %}
@@ -47,9 +47,25 @@
     </div>
     {% endfor %}
     <script language="javascript">
+        const contentContainer = document.getElementById("btn_container");
+        const reader = localStorage.getItem('rname');
         let t1 = 0;
         let t2 = 0;
         let timer = null;
+
+        document.addEventListener("DOMContentLoaded", function () {
+            if (reader === null) {
+                contentContainer.innerHTML = '<a href="/login" class="btn_login">登入</a>';
+            } else {
+                contentContainer.innerHTML = `
+			<button class='btn_login'>黃金會員</button>
+			<div class="hover px-4 py-6 space-y-2">
+				<a href="/">借書紀錄</a>
+				<div>個人資料</div>
+				<div class="btn_logout">登出</div>
+			</div>`;
+            }
+        });
 
         document.onscroll = function () {
             clearTimeout(timer);
@@ -76,14 +92,14 @@
 
                 fetch("http://localhost:5000/scroll_stop", {
                     body: JSON.stringify({
-                        bodyTop : bodyTop,
+                        bodyTop: bodyTop,
                     }),
                     headers: new Headers({
                         'Content-Type': 'application/json',
                     }),
                     method: "POST"
                 })
-                    // .then((json) => json.json())
+                // .then((json) => json.json())
             }
         }
     </script>

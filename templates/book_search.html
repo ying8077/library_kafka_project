@@ -35,7 +35,7 @@
          <div class="relative">
             <img src="/static/images/{{default(row['img'])}}">
             <div class="borrow">
-               <a href="/" class="btn_borrow">借書</a>
+               <a class="btn_borrow" onclick="(borrow({{row['ISBN']}}))">借書</a>
             </div>
          </div>
          <div class="ml-24 mt-4">
@@ -53,7 +53,30 @@
 </body>
 
 </html>
+<script>
+   function borrow(isbn) {
+      console.log(isbn)
+      fetch('http://localhost:5000/borrow', {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({
+            "isbn": isbn
+         })
+      })
+         .then(res => res.json())
+         .then(data => {
+            console.log(data)
+            if (data.msg2 == "" || data.msg2 == "未知") {
+               alert(data.msg1)
+            } else {
+               alert(data.msg1 + data.msg2)
+            }
+         })
+   }
 
+</script>
 <style>
    .book {
       width: 100%;

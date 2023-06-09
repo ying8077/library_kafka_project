@@ -18,9 +18,9 @@
 				<a href="/"><img class="header_logo" src="/static/images/logo.png" /></a>
 			</div>
 			<div class='header_right'>
-				<div>最新消息</div>
-				<div>關於我們</div>
-				<a href="/login" class='btn_login'>登入</a>
+				<div class="mr-12">最新消息</div>
+				<div class="mr-12">關於我們</div>
+				<div id="btn_container"></div>
 			</div>
 		</div>
 	</header>
@@ -47,9 +47,17 @@
 			{% endfor %}
 		</div>
 	</div>
+	<script type="text/javascript" src="/static/header.js"></script>
 </body>
 
 </html>
+
+<script>
+	function signout() {
+		localStorage.removeItem("rname");
+		location.href='/r_signout';
+	}
+</script>
 
 <style>
 	.flex_center {

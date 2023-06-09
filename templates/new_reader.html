@@ -10,68 +10,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<!-- <body>
-    <h1>註冊讀者帳戶</h1>
-    <br>
-    <div><a href="/">回到首頁</a></div>
-    <br>
-    <hr>
-    <form action="{{ url_for('r_signup') }}" method="POST">
-        姓名<br>
-        <input type="text" name="rname" /></br>
-        身分證字號<br>
-        <input type="text" name="ssn" /></br>
-        地址<br>
-        <textarea type="text" name="address"></textarea><br>
-        信箱<br>
-        <input type="text" name="mail" /></br>
-        電話<br>
-        <input type="text" name="phone" /><br>
-        設定密碼<br>
-        <input type="password" name="password" /><br><br>
-        <button>註冊</button>
-    </form>
-</body> -->
-
-<!-- <script>
-    function onSubmit() {
-        // e.preventDefault();
-        name = document.getElementById("name").value
-        id = document.getElementById("id").value
-        address = document.getElementById("address").value
-        email = document.getElementById("email").value
-        phone = document.getElementById("phone").value
-        pass = document.getElementById("pass").value
-        console.log(pass)
-        // const formData = new FormData(event.target);
-        // let formObj = Object.fromEntries(formData.entries());
-        // console.log(acc)
-        fetch('http://localhost:5000/r_signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                "name": name,
-                "id"  : id,
-                "address"  : address,
-                "email"  : email,
-                "phone": phone,
-                "pass": pass,
-            })
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data["status"] == "error") {
-                    alert(data.status)
-                } else {
-                    alert("success")
-                }
-            })
-    }
-
-</script> -->
-
 <body>
     <header>
         <div class="header">
@@ -79,12 +17,13 @@
                 <a href="/"><img class="header_logo" src="/static/images/logo.png" /></a>
             </div>
             <div class='header_right'>
-                <div>最新消息</div>
-                <div>關於我們</div>
-                <a href="/login" class='btn_login'>登入</a>
-            </div>
+				<div class="mr-12">最新消息</div>
+				<div class="mr-12">關於我們</div>
+				<div id="btn_container"></div>
+			</div>
         </div>
     </header>
+
     <div class="login rounded-lg">
         <div class="login-header">
             <h3>註冊</h3>
@@ -119,12 +58,12 @@
             </div>
         <!-- </form> -->
     </div>
+    <script type="text/javascript" src="/static/header.js"></script>
 </body>
 
 </html>
 <script>
     function onSubmit() {
-        // e.preventDefault();
         name = document.getElementById("name").value
         id = document.getElementById("id").value
         address = document.getElementById("address").value

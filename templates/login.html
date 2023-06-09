@@ -17,10 +17,10 @@
                 <a href="/"><img class="header_logo" src="/static/images/logo.png" /></a>
             </div>
             <div class='header_right'>
-                <div>最新消息</div>
-                <div>關於我們</div>
-                <a href="/login" class='btn_login'>登入</a>
-            </div>
+				<div class="mr-12">最新消息</div>
+				<div class="mr-12">關於我們</div>
+				<div id="btn_container"></div>
+			</div>
         </div>
     </header>
     <div class="login rounded-lg">
@@ -37,31 +37,23 @@
                 <label>密碼</label>
                 <input id="pass" type="password" class="input" name="password" />
             </div>
-            <div class="d-grid col-12">
-                <input value="登入" class="btn-login" onclick="(onSubmit())" />
+            <div>
+                <input type="button" value="登入" class="btn-login" onclick="(onSubmit())" />
             </div>
         </form>
         <div class="login-label">
             <label>第三方帳號登入</label>
         </div>
     </div>
-    <!-- <form action="/r_signin" method="POST">
-        姓名 <input type="text" name="rname" /><br />
-        密碼 <input type="password" name="password" /><br />
-        <button>登入</button>
-    </form> -->
+    <script type="text/javascript" src="/static/header.js"></script>
 </body>
 
 </html>
 
 <script>
     function onSubmit() {
-        // e.preventDefault();
         acc = document.getElementById("acc").value
         pass = document.getElementById("pass").value
-        // const formData = new FormData(event.target);
-        // let formObj = Object.fromEntries(formData.entries());
-        // console.log(acc)
         fetch('http://localhost:5000/r_signin', {
             method: 'POST',
             headers: {
@@ -75,15 +67,15 @@
             .then(res => res.json())
             .then(data => {
                 if (data.status == "error") {
-                    alert(data.status)
+                    alert('帳號或密碼錯誤')
                 } else {
                     window.localStorage.setItem("rname", data.rname)
                     window.localStorage.setItem("ssn", data.ssn)
-                    alert("success")
+                    alert("登入成功")
+                    window.location.href = "/";
                 }
             })
     }
-
 </script>
 
 <style>
@@ -150,6 +142,7 @@
         font-size: 16px;
         background-color: #000000;
         color: #FFFFFF;
+        text-align: center;
     }
 
     .login-label label {

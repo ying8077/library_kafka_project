@@ -18,9 +18,9 @@
             <a href="/"><img class="header_logo" src="/static/images/logo.png" /></a>
          </div>
          <div class='header_right'>
-            <div>最新消息</div>
-            <div>關於我們</div>
-            <a href="/login" class='btn_login'>登入</a>
+				<div class="mr-12">最新消息</div>
+				<div class="mr-12">關於我們</div>
+				<div id="btn_container"></div>
          </div>
       </div>
    </header>
@@ -35,7 +35,7 @@
          <div class="relative">
             <img src="/static/images/{{default(row['img'])}}">
             <div class="borrow">
-               <a href="/" class="btn_borrow">借書</a>
+               <a class="btn_borrow" onclick="(borrow({{row['ISBN']}}))">借書</a>
             </div>
          </div>
          <div class="ml-24 mt-4">
@@ -49,10 +49,34 @@
          </div>
       </div>
       {% endfor %}
+   <script type="text/javascript" src="/static/header.js"></script>
 </body>
 
 </html>
+<script>
+   function borrow(isbn) {
+      console.log(isbn)
+      fetch('http://localhost:5000/borrow', {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({
+            "isbn": isbn
+         })
+      })
+         .then(res => res.json())
+         .then(data => {
+            console.log(data)
+            if (data.msg2 == "" || data.msg2 == "未知") {
+               alert(data.msg1)
+            } else {
+               alert(data.msg1 + data.msg2)
+            }
+         })
+   }
 
+</script>
 <style>
    .book {
       width: 100%;

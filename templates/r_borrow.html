@@ -5,37 +5,188 @@
    <meta charset="utf-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>借閱紀錄</title>
+   <link rel=stylesheet type="text/css" href="/static/styles/header.css">
+   <script src="https://cdn.tailwindcss.com"></script>
    <meta name="google" content="notranslate">
+   <style type="text/css">
+      * {
+         margin: 0%;
+      }
+
+      .title1 {
+         height: 60px;
+         width: 100%;
+         display: flex;
+         align-items: center;
+         padding-left: 10px;
+         background-color: #FFF9F1;
+         color: black;
+         font-weight: bold;
+      }
+
+      .title2 {
+         padding-top: 15px;
+         /* padding-left: 12px; */
+      }
+
+      .block1 {
+         padding-left: 20px;
+         margin-top: 50px;
+      }
+
+      .table1 {
+         width: 80%;
+         margin: 20px auto;
+         margin-top: 10px;
+      }
+
+      .inputArea {
+         border-radius: 5px;
+         width: 250px;
+         height: 30px;
+      }
+
+      .searchBtn {
+         background-color: white;
+         border: none;
+      }
+
+      .main {
+         width: 80%;
+         margin: 20px auto;
+
+      }
+
+      table {
+         border-spacing: 0;
+         width: 100%;
+         border-collapse: collapse;
+         /* border: none;  */
+      }
+
+      tr {
+         text-align: center;
+      }
+
+      th {
+         padding: 17px;
+      }
+
+      td {
+         height: 35px;
+         font-size: 13px;
+         font-weight: bolder;
+      }
+
+      table tbody tr:nth-child(odd) {
+         background-color: #eee
+      }
+
+      table thead {
+         background-color: #BBDBBF;
+         color: rgb(21, 87, 83);
+         font-size: 14px;
+         font-weight: bolder;
+      }
+
+      table thead th:first-child {
+         border-radius: 10px 0 0 0;
+         /* border: 1px solid blue; */
+      }
+
+      table thead th:last-child {
+         border-radius: 0 10px 0 0;
+         /* border-right: 1px solid blue; */
+      }
+
+      table tbody tr:last-child td:first-child {
+         border-radius: 0 0 0 10px;
+      }
+
+      table tbody tr:last-child td:last-child {
+         border-radius: 0 0 10px 0;
+      }
+
+      hr {
+         border: none;
+         border-top: 3px solid #e7e1da;
+      }
+
+      .more {
+         font-size: 14px;
+         padding-left: 95%;
+         font-weight: bolder;
+         color: rgb(31, 70, 76);
+      }
+      
+   </style>
 </head>
 
 <body>
+   <header>
+      <div class="header">
+          <div>
+              <a href="/"><img class="header_logo" src="/static/images/logo.png" /></a>
+          </div>
+          <div class='header_right'>
+          <div class="mr-12">最新消息</div>
+          <div class="mr-12">關於我們</div>
+          <div id="btn_container"></div>
+       </div>
+      </div>
+  </header>
+  {% for row in book %}
+  <div class="w-3/5 mx-auto mt-24 book">
+      <div class="book_info">
+          <img src="/static/images/{{row['img']}}">
+          <div class="ml-24 mt-24">
+              <h3 class="mb-8 text-3xl font-bold">{{row['title']}}</h3>
+              <div class="space-y-2">
+                  <div>中文書＞心理勵志＞自我成長</div>
+                  <div>ISBN : {{row['ISBN']}}</div>
+                  <div>作者 : {{row['author']}}</div>
+                  <div>出版社 : {{row['publisher']}}</div>
+              </div>
+              <div class="mt-4">
+                  <a href="/" class="btn_borrow">借閱申請</a>
+              </div>
+          </div>
+      </div>
+      <div class="my-24 ml-8 book_description">
+          <h4 class="text-2xl font-bold">內容簡介</h4>
+          <p class="mt-8 ml-4">{{row['description']|safe}}</p>
+      </div>
+  </div>
+  {% endfor %}
+  <script type="text/javascript" src="/static/header.js"></script>
 
-   <h1>我的借閱紀錄</h1>
-   <br>
-    <div><a href="/r_member">回會員控制頁面</a></div>
-    <br>
-   <hr>
-   <table border=1>
-      <thead>
-         <td>ISBN</td>
-         <td>書名</td>
-         <td>借閱日期</td>
-         <td>應歸還日期</td>
-         <td>還書</td>
-      </thead>
-
-      {% for row in borrowed %}
-      <tr>
-         <td>{{row["book_no"]}}</td>
-         <td>{{row["title"]}}</td>
-         <td>{{row["issue"]}}</td>
-         <td>{{row["return_date"]}}</td>
-         <td>
-            <a href="/return_book?book={{row['book_no']}}">我要還書</a>
-         </td>
-      </tr>
-      {% endfor %}
-   </table>
+   <div class="block1">
+      <div class="main">
+         <table>
+            <thead>
+               <td>書名</td>
+               <td>次數</td>
+               <td>借閱時間</td>
+               <td>借閱期限</td>
+               <td>還書</td>
+            </thead>
+            <tbody>
+               {% for row in borrowed %}
+               <tr>
+                  <td>{{row["book_no"]}}</td>
+                  <td>{{row["title"]}}</td>
+                  <td>{{row["issue"]}}</td>
+                  <td>{{row["return_date"]}}</td>
+                  <td>
+                     <a href="/return_book?book={{row['book_no']}}">我要還書</a>
+                  </td>
+               </tr>
+               {% endfor %}
+            </tbody>
+         </table>
+      </div>
+   </div>
 
 </body>
+
 </html>

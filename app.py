@@ -399,71 +399,74 @@ def borrow():
       data = request.get_json()
       ISBN = data.get("isbn")
       print(ISBN)
-      # try:
-      with sql.connect("books.db") as con:
-          cur = con.cursor()
-          cur.execute("SELECT title FROM books WHERE ISBN=?", (ISBN,))
-          con.commit()
-          title = cur.fetchone()[0]
+      try:
+        with sql.connect("books.db") as con:
+            cur = con.cursor()
+            cur.execute("SELECT title FROM books WHERE ISBN=?", (ISBN,))
+            con.commit()
+            title = cur.fetchone()[0]
 
-      with sql.connect("readers.db") as con1:
-          con1.row_factory = sql.Row
-          cur1 = con1.cursor()
-          reader = session["reader"]
-          cur1.execute(
-              "SELECT ssn FROM readers WHERE rname = ?", (reader,))
-          con1.commit()
-          people = cur1.fetchone()[0]
+        with sql.connect("readers.db") as con1:
+            con1.row_factory = sql.Row
+            cur1 = con1.cursor()
+            reader = session["reader"]
+            cur1.execute(
+                "SELECT ssn FROM readers WHERE rname = ?", (reader,))
+            con1.commit()
+            people = cur1.fetchone()[0]
 
-      with sql.connect("reports.db") as con2:
-          con2.row_factory = sql.Row
-          cur2 = con2.cursor()
-          cur2.execute(
-              "SELECT book_no FROM reports WHERE book_no = ?", (ISBN,))
-          # con2.commit()
-          tmp = cur2.fetchone()
-          if tmp is None:
-            return_date = datetime.date.today() + datetime.timedelta(days=30)
+        with sql.connect("reports.db") as con2:
+            con2.row_factory = sql.Row
             cur2 = con2.cursor()
-            cur2.execute("INSERT INTO reports(User_id, book_no, title) VALUES (?, ?, ?)", (people, ISBN, title))
-            send_borrow_event(people, reader, title)
+            cur2.execute(
+                "SELECT book_no FROM reports WHERE book_no = ?", (ISBN,))
             con2.commit()
-            msg1 = "借閱成功！請在" + return_date.strftime('%Y-%m-%d')+"之前歸還，謝謝！"
-            with sql.connect("books.db") as con4:
-                cur = con4.cursor()
-                cur.execute(
-                    "SELECT title FROM books WHERE ISBN = ?", (ISBN,))
-                msg2 = cur.fetchone()[0]
-            res = {
-              "msg1": msg1,
-              "msg2": msg2
-            }
-            print(res)
-            return jsonify(res)
-          else:
-              msg1 = "這本書已經被借走囉！"
-              msg2 = ""
+            tmp = cur2.fetchone()
+            if tmp is None:
+              return_date = datetime.date.today() + datetime.timedelta(days=30)
+              cur2 = con2.cursor()
+              cur2.execute("INSERT INTO reports(User_id, book_no, title) VALUES (?, ?, ?)", (people, ISBN, title))
+              send_borrow_event(people, reader, title)
+              con2.commit()
+              msg1 = "借閱成功！請在" + return_date.strftime('%Y-%m-%d')+"之前歸還，謝謝！"
+              with sql.connect("books.db") as con4:
+                  cur = con4.cursor()
+                  cur.execute(
+                      "SELECT title FROM books WHERE ISBN = ?", (ISBN,))
+                  msg2 = cur.fetchone()[0]
               res = {
                 "msg1": msg1,
                 "msg2": msg2
               }
               print(res)
               return jsonify(res)
+            else:
+                msg1 = "這本書已經被借走囉！"
+                msg2 = ""
+                res = {
+                  "msg1": msg1,
+                  "msg2": msg2
+                }
+                print(res)
+                return jsonify(res)
 
-      # except Exception as e:
-      #     con.rollback()
-      #     msg1 = "發生錯誤！請稍後再試！"
-      #     msg2 = "未知"
-      #     print(e)
-      # res = {
-      #   "msg1": msg1,
-      #   "msg2": msg2
-      # }
-      # print(res)
-      # return jsonify(res)
-        # return render_template("borrow_result.html", msg1=msg1, msg2=msg2)
-    # else:
-    #     return redirect("/")
+      except:
+          con.rollback()
+          msg1 = "發生錯誤！請稍後再試！"
+          msg2 = "未知"
+          res = {
+            "msg1": msg1,
+            "msg2": msg2
+          }
+      finally:
+          con.close()
+          con1.close()
+          con2.close()
+          # con4.close()
+      print(res)
+      return jsonify(res)
+  else:
+    return redirect("/")
 
 # 讀者還書
 
@@ -486,7 +489,8 @@ def return_book():
         ssn = session["ssn"]
         reader = session["reader"]
         send_return_event(ssn, reader, title)
-        return render_template("r_result.html", msg="成功歸還！祝您有美好的一天！")
+        # return render_template("r_result.html", msg="成功歸還！祝您有美好的一天！")
+        return redirect("/r_borrowed")
     else:
         return redirect("/")
 

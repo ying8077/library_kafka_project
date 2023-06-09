@@ -4,7 +4,7 @@ import sqlite3 as sql
 import datetime
 import json
 from flask_cors import CORS
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 CORS(app)
 app.secret_key = 'nccugogo'
 
@@ -185,64 +185,41 @@ def home():
 
 @app.route('/book/<int:id>')
 def book(id):
-    con = sql.connect("books.db")
-    con.row_factory = sql.Row
-    cur = con.cursor()
-    cur.execute("SELECT * FROM books WHERE id=?", (id,))
-    book = cur.fetchall()
-    return render_template('book.html', book=book)
+  con = sql.connect("books.db")
+  con.row_factory = sql.Row
+  cur = con.cursor()
+  cur.execute("SELECT * FROM books WHERE id=?", (id,))
+  book = cur.fetchall()
+  return render_template('book.html', book=book)
 
-# 讀者登入，每次登入就記錄到topic(kafka log)
-# @app.route('/r_signin',methods = ['POST'])
-# def r_signin():
-#   con = sql.connect("readers.db")
-#   con.row_factory = sql.Row
-#   cur = con.cursor()
-#   rname=request.form["rname"]
-#   rpassword=request.form["password"]
-#   cur.execute("SELECT * FROM readers WHERE rname=? and password=?", (rname, rpassword))
-#   people = cur.fetchall()
-#   if len(people) == 0:
-#       return redirect("/result?msg=帳號或密碼錯誤")
-#   cur.execute("SELECT ssn FROM readers WHERE rname=? and password=?", (rname, rpassword,))
-#   ssn = cur.fetchone()[0]
-#   session["reader"] = rname
-#   session["ssn"] = ssn
-#   send_login_event(ssn, rname)
-#   return redirect("/")
-
-# 讀者登入，每次登入就記錄到topic(kafka log)
-
-
+#讀者登入，每次登入就記錄到topic(kafka log)   
 @app.route('/r_signin', methods=['POST'])
 def r_signin():
-    con = sql.connect("readers.db")
-    con.row_factory = sql.Row
-    cur = con.cursor()
-    data = request.get_json()
-    print(data)
-    rname = data.get('name')
-    rpassword = data.get('password')
-    cur.execute("SELECT * FROM readers WHERE rname=? and password=?",
-                (rname, rpassword))
-    people = cur.fetchall()
-    if len(people) == 0:
-        data = {
-            "status": "error",
-        }
-        return jsonify(data)
-    cur.execute("SELECT ssn FROM readers WHERE rname=? and password=?",
-                (rname, rpassword,))
-    ssn = cur.fetchone()[0]
-    session["reader"] = rname
-    session["ssn"] = ssn
-    send_login_event(ssn, rname)
-    data = {
-        "status": "success",
-        "rname": session["reader"],
-        "ssn": session["ssn"]
-    }
-    return jsonify(data)
+  con = sql.connect("readers.db")
+  con.row_factory = sql.Row
+  cur = con.cursor()
+  data = request.get_json()
+  print(data)
+  rname = data.get('name')
+  rpassword = data.get('password')
+  cur.execute("SELECT * FROM readers WHERE rname=? and password=?",(rname, rpassword))
+  people = cur.fetchall()
+  if len(people) == 0:
+      data = {
+          "status": "error",
+      }
+      return jsonify(data)
+  cur.execute("SELECT ssn FROM readers WHERE rname=? and password=?",(rname, rpassword,))
+  ssn = cur.fetchone()[0]
+  session["reader"] = rname
+  session["ssn"] = ssn
+  send_login_event(ssn, rname)
+  data = {
+      "status": "success",
+      "rname": session["reader"],
+      "ssn": session["ssn"]
+  }
+  return jsonify(data)
 
 # 讀者註冊
 

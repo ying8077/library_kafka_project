@@ -441,13 +441,12 @@ def borrow():
       with sql.connect("reports.db") as con2:
           con2.row_factory = sql.Row
           cur2 = con2.cursor()
-          cur2.execute(
-              "SELECT book_no FROM reports WHERE book_no = ?", (ISBN,))
+          cur2.execute("SELECT book_no FROM reports WHERE book_no = ?", (ISBN,))
           # con2.commit()
           tmp = cur2.fetchone()
           if tmp is None:
             return_date = datetime.date.today() + datetime.timedelta(days=30)
-            cur2 = con2.cursor()
+            # cur2 = con2.cursor()
             cur2.execute("INSERT INTO reports(User_id, book_no, title) VALUES (?, ?, ?)", (people, ISBN, title))
             send_borrow_event(people, reader, title)
             con2.commit()

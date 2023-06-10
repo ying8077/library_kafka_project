@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> ceb0e3e88ec2e59c8918f7ff7a9b32ffe038ed4b
 ## 安裝
 
 1. 去kafka下載kafka_2.12-2.4.1.tgz並解壓縮到User的目錄下(跟桌面同層級，不然會出現命令過長的錯誤)
@@ -24,8 +27,3 @@ cd .\kafka_2.12-2.4.1\
 6. 使用```pip install -r requirements.txt```安裝所需套件
 
 7. 開啟app.py會跳出頁面，進行登入操作，該server會成為producer發送訊息到特定topic
-
-
-
-
-

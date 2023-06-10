@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            margin: 0%;
+        }
+
+        .title1 {
+            height:60px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            background-color: #FFF9F1;
+            color: black;
+            font-weight: bold;
+        }
+
+        .title2 {
+            padding-top: 15px;
+            padding-left: 12px;
+        }
+
+        hr{
+            border:none;
+            border-top: 3px solid   #e7e1da;
+        }
+        .main {
+            width: 80%;
+            margin: 20px auto;
+
+        }
+
+        table {
+            border-spacing: 0;
+            width: 100%;
+            border-collapse: collapse;
+            /* border: none;  */
+        }
+
+        tr {
+            text-align: center;
+        }
+
+        tr td:nth-child(3) {
+            text-align: left;
+            padding-left: 50px;
+        }
+
+        th {
+            padding: 17px;
+        }
+
+        td {
+            height: 35px;
+            font-size: 13px;
+            font-weight: bolder;
+        }
+
+        table tbody tr:nth-child(odd) {
+            background-color: #eee
+        }
+
+        table thead {
+            background-color: #BBDBBF;
+            color: rgb(21, 87, 83);
+            font-size: 14px;
+            font-weight: bolder;
+        }
+
+        table thead th:first-child {
+            border-radius: 10px 0 0 0;
+            /* border: 1px solid blue; */
+        }
+
+        table thead th:last-child {
+            border-radius: 0 10px 0 0;
+            /* border-right: 1px solid blue; */
+        }
+
+        table tbody tr:last-child td:first-child {
+            border-radius: 0 0 0 10px;
+        }
+
+        table tbody tr:last-child td:last-child {
+            border-radius: 0 0 10px 0;
+        }
+
+        hr {
+            border: none;
+            border-top: 3px solid #e7e1da;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2 class="title1">紀錄查看平台</h2>
+    <hr width="100%" ></hr>
+    <h3 class="title2">查詢結果</h3>
+
+    <div class="main">
+        <table>
+            <thead>
+                <td>ssn</td>
+                <td>name</td>
+                <td>書名</td>
+                <td>number</td>
+            </thead>
+            <tbody>
+                {% for row in record %}
+                <tr>
+                    <td>{{row["user_ssn"]}}</td>
+                    <td>{{row["user_name"]}}</td>
+                    <td>
+                        {% for num in row["books"].split(",") %}
+                        。{{ num }}
+                        <br>
+                        {% endfor %}
+                    </td>
+                    <td>{{row["num"]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入</title>
+    <link rel=stylesheet type="text/css" href="/static/styles/header.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div>
+                <a href="/"><img class="header_logo" src="/static/images/logo.png" /></a>
+            </div>
+            <div class='header_right'>
+				<div class="mr-12">最新消息</div>
+				<div class="mr-12">關於我們</div>
+				<div id="btn_container"></div>
+			</div>
+        </div>
+    </header>
+    <div class="login rounded-lg">
+        <div class="login-header">
+            <h3>登入</h3>
+            <a href="/new_reader">註冊新帳號</a>
+        </div>
+        <form>
+            <div class="login-ipt-group">
+                <label>姓名</label>
+                <input id="acc" type="text" class="input" name="rname" />
+            </div>
+            <div class="login-ipt-group mb-4">
+                <label>密碼</label>
+                <input id="pass" type="password" class="input" name="password" />
+            </div>
+            <div>
+                <input type="button" value="登入" class="btn-login" onclick="(onSubmit())" />
+            </div>
+        </form>
+        <div class="login-label">
+            <label>第三方帳號登入</label>
+        </div>
+    </div>
+    <script type="text/javascript" src="/static/header.js"></script>
+</body>
+
+</html>
+
+<script>
+    function onSubmit() {
+        acc = document.getElementById("acc").value
+        pass = document.getElementById("pass").value
+        fetch('http://localhost:5000/r_signin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "name": acc,
+                "password": pass,
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status == "error") {
+                    alert('帳號或密碼錯誤')
+                } else {
+                    window.localStorage.setItem("rname", data.rname)
+                    window.localStorage.setItem("ssn", data.ssn)
+                    alert("登入成功")
+                    window.location.href = "/";
+                }
+            })
+    }
+</script>
+
+<style>
+    .login {
+        width: 600px;
+        margin: 200px auto;
+        padding: 24px 36px;
+        border: 1px solid #E1E0E0;
+    }
+
+
+    .login-header {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #E1E0E0;
+    }
+
+    .login-header a {
+        margin-left: auto;
+        color: #a2a2a2;
+    }
+
+    h3 {
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .login form {
+        width: 100%;
+        padding: 30px 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .input {
+        height: 36px;
+    }
+
+    .login-ipt-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .login input {
+        line-height: 28px;
+        padding: 0 10px;
+        border-radius: 5px;
+        border: 1px solid #cacaca;
+        margin-bottom: 8px;
+    }
+
+    .login input:focus,
+    .login input:active {
+        outline: none;
+    }
+
+    .btn-login {
+        width: 100%;
+        height: 40px;
+        font-weight: 600;
+        border-radius: 20px;
+        border: none;
+        margin: 16px 0;
+        font-size: 16px;
+        background-color: #000000;
+        color: #FFFFFF;
+        text-align: center;
+    }
+
+    .login-label label {
+        color: #cacaca;
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+
+    .login-label label::before,
+    .login-label label::after {
+        content: '';
+        flex-grow: 1;
+        height: 1px;
+        background-color: #cacaca;
+    }
+
+    .login-label label::before {
+        margin-right: 20px;
+    }
+
+    .login-label label::after {
+        margin-left: 20px;
+    }
+</style>

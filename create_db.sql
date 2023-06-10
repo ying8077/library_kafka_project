@@ -1,10 +1,13 @@
 CREATE TABLE books (
-    `ISBN` TEXT PRIMARY KEY,
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+    `ISBN` TEXT,
     `title` TEXT,
     `author` TEXT,
     `category` TEXT,
     `version` TEXT,
-    `publisher` TEXT
+    `publisher` TEXT,
+    `img` TEXT,
+    `description` TEXT
 );
 
 CREATE TABLE recommends (
@@ -46,4 +49,26 @@ CREATE TABLE reports (
     FOREIGN KEY(`User_id`) REFERENCES `readers`(`ssn`) ON DELETE CASCADE,
     FOREIGN KEY(`book_no`) REFERENCES `books`(`ISBN`) ON DELETE CASCADE
     FOREIGN KEY(`title`) REFERENCES `books`(`title`) ON DELETE CASCADE
+);
+
+CREATE TABLE borrowtopic (
+    `No` INTEGER PRIMARY KEY ASC AUTOINCREMENT,
+    `user_ssn` TEXT,
+    `user_name` TEXT,
+    `behavior` TEXT,
+    `book_name` TEXT
+);
+
+CREATE TABLE logintopic (
+    `No` INTEGER PRIMARY KEY ASC AUTOINCREMENT,
+    `user_ssn` TEXT,
+    `user_name` TEXT,
+    `behavior` TEXT
+);
+
+CREATE TABLE searchtopic (
+    `No` INTEGER PRIMARY KEY ASC AUTOINCREMENT,
+    `user_ssn` TEXT,
+    `user_name` TEXT,
+    `behavior` TEXT
 );

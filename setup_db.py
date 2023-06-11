@@ -147,6 +147,6 @@ with db:
         db.executescript(create_db_sql)
         cursor = db.cursor()
         cursor.execute(
-            'INSERT INTO searchtopic(user_ssn, user_name, behavior) VALUES ("123456789","jeff","search")'
+            'INSERT INTO searchtopic(book_name, user_ssn, user_name, behavior) VALUES ("神的棲息地","123456789","jeff","search")'
         )
 print ("searchtopic table created successfully")
